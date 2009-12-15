@@ -14,3 +14,7 @@ Helium (will be) a _simple_ RSS reader for OS X.
 * Garbage Collected
 * NSXMLDocument for parsing (for now)
 * Core Data for storage
+
+# Mockup #
+
+![Mockup of Helium](http://fileability.net/snaps/helium_mockup.png)
