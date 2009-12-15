@@ -8,16 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Helium_AppDelegate : NSObject 
-{
-    NSWindow *window;
-    
+@interface Helium_AppDelegate : NSObject<NSApplicationDelegate>
+{    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
+	
+	NSMutableArray *readerWindowControllers;
 }
-
-@property (nonatomic, retain) IBOutlet NSWindow *window;
 
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

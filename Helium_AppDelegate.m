@@ -7,10 +7,31 @@
 //
 
 #import "Helium_AppDelegate.h"
+#import "HEReaderWindowController.h"
 
 @implementation Helium_AppDelegate
 
-@synthesize window;
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		readerWindowControllers = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
+{
+	HEReaderWindowController *reader = [[HEReaderWindowController alloc] initWithWindowNibName:@"HEReader"];
+	NSLog(@"reader = %@", reader);
+	
+	[readerWindowControllers addObject:reader];
+	
+	[reader showWindow:nil];
+}
+
+#pragma mark Core Data
 
 /**
     Returns the support directory for the application, used to store the Core Data
@@ -192,21 +213,5 @@
 
     return NSTerminateNow;
 }
-
-
-/**
-    Implementation of dealloc, to release the retained variables.
- */
- 
-- (void)dealloc {
-
-    [window release];
-    [managedObjectContext release];
-    [persistentStoreCoordinator release];
-    [managedObjectModel release];
-	
-    [super dealloc];
-}
-
 
 @end
