@@ -13,8 +13,8 @@
 
 - (id) init
 {
-	self = [super init];
-	if (self != nil) {
+	if (self = [super init])
+	{
 		readerWindowControllers = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -23,15 +23,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-	HEReaderWindowController *reader = [[HEReaderWindowController alloc] initWithWindowNibName:@"HEReader"];
-	NSLog(@"reader = %@", reader);
-	
+	HEReaderWindowController *reader = [[HEReaderWindowController alloc] initWithWindowNibName:@"HEReader"];	
 	[readerWindowControllers addObject:reader];
 	
 	[reader showWindow:nil];
 }
 
-#pragma mark Core Data
+#pragma mark Core Data Boilerplate
 
 /**
     Returns the support directory for the application, used to store the Core Data
