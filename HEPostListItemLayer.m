@@ -42,8 +42,8 @@
 {
 	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
 	
-	float fontSize = (small ? 11.0 : 13.0);
-	if (selected)
+	float fontSize = (small ? 10.0 : 13.0);
+	if (!small || selected)
 		[dict setValue:[NSFont boldSystemFontOfSize:fontSize] forKey:NSFontAttributeName];
 	else
 		[dict setValue:[NSFont systemFontOfSize:fontSize] forKey:NSFontAttributeName];
@@ -147,7 +147,7 @@
 	//Draw Text
 	const float leftTextMargin = 9.0;
 	const float rightTextMargin = 8.0;
-	const float topTextMargin = 6.0;
+	const float topTextMargin = 5.0;
 	const float betweenLineTextMargin = 4.0;
 	const float bottomTextMargin = 7.0;
 	
@@ -162,7 +162,7 @@
 	NSRect titleRect = NSMakeRect(leftTextMargin, topTextMargin, bounds.size.width - leftTextMargin - rightTextMargin, bounds.size.height - topTextMargin - betweenLineTextMargin - smallSize.height - bottomTextMargin);
 	[title drawInRect:titleRect withAttributes:bigAttributes];
 	
-	NSRect sourceRect = NSMakeRect(titleRect.origin.x, NSMaxY(titleRect) + betweenLineTextMargin, titleRect.size.width, smallSize.height);
+	NSRect sourceRect = NSMakeRect(titleRect.origin.x, topTextMargin + NSHeight(titleRect) + betweenLineTextMargin, titleRect.size.width, smallSize.height);
 	[source drawInRect:sourceRect withAttributes:smallAttributes];
 	
 	
