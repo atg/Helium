@@ -43,6 +43,7 @@
 	
 	//Test layers out
 	
+	/*
 	HEPostListItemLayer *layer = [[HEPostListItemLayer alloc] init];
 	layer.frame = CGRectMake(20, 20, [self bounds].size.width - 40, 66);
 	layer.isSelected = YES;
@@ -64,6 +65,9 @@
 	layer3.isSelected = NO;
 	[posts addObject:layer3];
 	[[self layer] addSublayer:layer3];
+	 */
+	
+	[[self enclosingScrollView] scrollToTopOfDocument:nil];
 }
 - (void)refreshedModel:(NSNotification *)notif
 {
@@ -167,7 +171,7 @@
 	}
 	[posts removeAllObjects];
 	
-	self.selectedLayer = nil;
+	//self.selectedLayer = nil;
 	
 	[[self layer] setNeedsDisplay];
 }
@@ -198,6 +202,17 @@
 }
 - (void)setSelectedLayer:(HEPostListItemLayer *)layer
 {
+	if (selectedLayer != layer)
+	{
+		NSInteger layerIndex = [posts indexOfObjectIdenticalTo:layer];
+		float margin = 12.0;
+		if (layerIndex == 0)
+			margin = 20.0;
+		
+		//If the layers are different, scroll to the new layer
+		[self scrollPoint:NSMakePoint(0, [self frame].size.height + margin - layer.frame.origin.y - [[[self enclosingScrollView] contentView] frame].size.height)];//[self frame].size.height  - layer.frame.size.height[[[self enclosingScrollView] contentView] frame].size.height - layer.frame.origin.y/* */)];
+	}
+	
 	HEPostListItemLayer *oldSelectedLayer = selectedLayer;
 	selectedLayer.isSelected = NO;
 	

@@ -66,7 +66,7 @@
 }
 - (IBAction)openInBrowser:(id)sender
 {
-	NSURL *url = [[[[postWebView mainFrame] provisionalDataSource] request] URL];
+	NSURL *url = [[[[postWebView mainFrame] dataSource] request] URL];
 	if (url)
 	{
 		[[NSWorkspace sharedWorkspace] openURL:url];
@@ -76,6 +76,18 @@
 		url = [NSURL URLWithString:[[postsView.selectedLayer managedObject] valueForKey:@"URL"]];
 		if (url)
 			[[NSWorkspace sharedWorkspace] openURL:url];
+	}
+}
+- (IBAction)backForwardButtons:(id)sender
+{
+	//Back
+	if ([sender selectedSegment] == 0)
+	{
+		[postWebView goBack:sender];
+	}
+	else
+	{
+		[postWebView goForward:sender];
 	}
 }
 

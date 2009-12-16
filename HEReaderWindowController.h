@@ -25,6 +25,7 @@
 
 - (IBAction)showComments:(id)sender;
 - (IBAction)openInBrowser:(id)sender;
+- (IBAction)backForwardButtons:(id)sender;
 
 - (BOOL)shouldCloseSheet:(id)sender;
 
