@@ -24,6 +24,9 @@
 
 @implementation HEPostListView
 
+@synthesize delegate;
+@synthesize selectedLayer;
+
 - (id)initWithFrame:(NSRect)frame
 {
 	if (self = [super initWithFrame:frame])
@@ -46,7 +49,7 @@
 	[posts addObject:layer];
 	[[self layer] addSublayer:layer];
 	
-	selectedLayer = layer;
+	self.selectedLayer = layer;
 	
 	
 	HEPostListItemLayer *layer2 = [[HEPostListItemLayer alloc] init];
@@ -92,6 +95,10 @@
 	{
 		HEPostListItemLayer *layer = [[HEPostListItemLayer alloc] init];
 		layer.frame = CGRectMake(20, previousMaxY, [self bounds].size.width - 40, 66);
+		layer.title = [postObject valueForKey:@"title"];
+		//layer.source = [managedObject valueForKeyPath:@"feed.name"];
+		
+		layer.managedObject = postObject;
 		
 		previousMaxY = layer.frame.origin.y + layer.frame.size.height + 11;
 		
@@ -100,8 +107,7 @@
 		
 		if (selectedLayer == nil)
 		{
-			layer.isSelected = YES;			
-			selectedLayer = layer;
+			self.selectedLayer = layer;
 		}
 		
 		[layer setNeedsDisplay];
@@ -146,7 +152,7 @@
 	}
 	[posts removeAllObjects];
 	
-	selectedLayer = nil;
+	self.selectedLayer = nil;
 	
 	[[self layer] setNeedsDisplay];
 }
@@ -169,16 +175,29 @@
 	{
 		if (NSPointInRect(p, NSRectFromCGRect(post.frame)))
 		{
-			HEPostListItemLayer *oldSelectedLayer = selectedLayer;
-			selectedLayer.isSelected = NO;
+			self.selectedLayer = post;
 			
-			post.isSelected = YES;
-			selectedLayer = post;
-			
-			[oldSelectedLayer setNeedsDisplay];
-			[post setNeedsDisplay];
 			break;
 		}
+	}
+}
+- (void)setSelectedLayer:(HEPostListItemLayer *)layer
+{
+	HEPostListItemLayer *oldSelectedLayer = selectedLayer;
+	selectedLayer.isSelected = NO;
+	
+	layer.isSelected = YES;
+	selectedLayer = layer;
+	
+	[oldSelectedLayer setNeedsDisplay];
+	[layer setNeedsDisplay];
+	
+	NSLog(@"Delegate = %@", delegate);
+	if ([delegate respondsToSelector:@selector(postListSelectionDidChange:)])
+	{
+		NSLog(@"Delegate responds to selector");
+		[delegate postListSelectionDidChange:self];
+		
 	}
 }
 

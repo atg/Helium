@@ -12,9 +12,10 @@
 @interface HERSSParser : NSObject
 {
 	NSURL *url;
+	NSManagedObject *feedObject;
 }
 
-- (id)initWithURL:(NSURL *)docURL;
+- (id)initWithURL:(NSURL *)docURL feedObject:(NSManagedObject *)feedObject;
 
 - (void)parseIntoContext:(NSManagedObjectContext *)ctx;
 

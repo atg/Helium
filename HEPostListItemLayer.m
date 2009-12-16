@@ -8,10 +8,18 @@
 
 #import "HEPostListItemLayer.h"
 
+@interface HEPostListItemLayer()
+
+- (NSDictionary *)attributesForSelected:(BOOL)selected small:(BOOL)small;
+
+@end
+
 
 @implementation HEPostListItemLayer
 
 @synthesize icon;
+@synthesize title;
+@synthesize source;
 @synthesize managedObject;
 @synthesize isSelected;
 
@@ -21,14 +29,6 @@
 	{
 		self.needsDisplayOnBoundsChange = YES;
 		self.autoresizingMask |= kCALayerWidthSizable;
-		/*[self addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintWidth
-														 relativeTo:@"superlayer"
-														  attribute:kCAConstraintWidth]];*/
-				
-		/*[self addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY
-														 relativeTo:@"superlayer"
-														  attribute:kCAConstraintMaxY]];*/
-		
 	}
 	return self;
 }
@@ -36,6 +36,35 @@
 - (BOOL)contentsAreFlipped
 {
 	return YES;
+}
+
+- (NSDictionary *)attributesForSelected:(BOOL)selected small:(BOOL)small
+{
+	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+	
+	float fontSize = (small ? 13 : 11);
+	if (selected)
+		[dict setValue:[NSFont boldSystemFontOfSize:small] forKey:NSFontAttributeName];
+	else
+		[dict setValue:[NSFont systemFontOfSize:small] forKey:NSFontAttributeName];
+	
+	if (selected)
+		[dict setValue:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+	else
+		[dict setValue:[NSColor colorWithCalibratedRed:0.243 green:0.288 blue:0.335 alpha:1.000] forKey:NSForegroundColorAttributeName];
+	
+	NSShadow *shadow = [[NSShadow alloc] init];
+	[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
+	[shadow setShadowBlurRadius:0.0];
+	
+	if (selected)
+		[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.0 alpha:1.0]];
+	else
+		[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.9 alpha:1.0]];
+	
+	[dict setValue:shadow forKey:NSShadowAttributeName];
+	
+	return dict;
 }
 
 - (void)drawInContext:(CGContextRef)ctx
@@ -110,6 +139,16 @@
 	}
 	
 	[innerFill drawInBezierPath:innerPath angle:90];
+	
+	
+	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:YES]];
+	
+	//Draw Text
+	NSDictionary *attributes = [self attributesForSelected:isSelected small:NO];
+	NSSize size = [title sizeWithAttributes:attributes];
+	NSRect titleRect = NSMakeRect(20, 20, [self bounds].size.width - 24.0, 30);
+	//[title drawInRect:rect withAttributes:attributes];
+	[title drawAtPoint:NSMakePoint(30, [self bounds].size.height - 60) withAttributes:attributes];
 	
 	[NSGraphicsContext setCurrentContext:oldContext];
 }

@@ -9,6 +9,8 @@
 #import "HEReaderWindowController.h"
 
 #import "HERefresher.h"
+#import "HEPostListView.h"
+#import "HEPostListItemLayer.h"
 
 @interface HEReaderWindowController ()
 
@@ -31,6 +33,23 @@
 {
 	[[self window] center];
 }
+
+- (void)postListSelectionDidChange:(HEPostListView *)listView
+{
+	NSLog(@"Post list selected did change %@", [listView.selectedLayer managedObject]);
+	NSManagedObject *postObject = [listView.selectedLayer managedObject];
+	[postController setContent:postObject];
+	
+	if ([postObject valueForKey:@"URL"])
+		[self loadWebViewURL:[NSURL URLWithString:[postObject valueForKey:@"URL"]]];
+}
+- (void)loadWebViewURL:(NSURL *)url
+{
+	NSLog(@"postWebView = %@", postWebView);
+	NSLog(@"URL = %@", url);
+	[[postWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
 
 #pragma mark Adding Feeds
 
@@ -63,8 +82,9 @@
 	[item setValue:[addFeedURLField stringValue] forKey:@"URL"];
 	[item setValue:[NSNumber numberWithInt:[addFeedImportance tag]] forKey:@"importance"];
 	
-	// http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&feed=rss
-	
+	/*
+http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&feed=rss
+	 */
 	[ctx save:nil];
 	[ctx reset];
 	

@@ -13,6 +13,8 @@
 @interface HEPostListItemLayer : CALayer
 {
 	NSImage *icon;
+	NSString *title;
+	NSString *source;
 	
 	NSManagedObject *managedObject;
 	
@@ -20,7 +22,11 @@
 }
 
 @property (assign) NSImage *icon;
+@property (assign) NSString *title;
+@property (assign) NSString *source;
+
 @property (assign) NSManagedObject *managedObject;
+
 @property (assign) BOOL isSelected;
 
 @end

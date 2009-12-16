@@ -22,11 +22,12 @@
 
 @implementation HERSSParser
 
-- (id)initWithURL:(NSURL *)docURL
+- (id)initWithURL:(NSURL *)docURL feedObject:(NSManagedObject *)feed
 {
 	if (self = [super init])
 	{
 		url = docURL;
+		feedObject = feed;
 	}
 	return self;
 }
@@ -35,6 +36,7 @@
 {
 	//Download the XML
 	NSError *err = nil;
+	NSLog(@"url2");
 	NSXMLDocument *xml = [[NSXMLDocument alloc] initWithContentsOfURL:url options:NSXMLDocumentTidyXML error:&err];
 	if (!xml || err)
 	{
@@ -46,7 +48,7 @@
 	for (NSXMLElement *channel in [[xml rootElement] elementsForName:@"channel"])
 	{
 		NSManagedObject *channelObject = [self parseChannelElement:channel intoContext:ctx];
-		//FIXME: Add channel to feed relationship set
+		[channelObject setValue:feedObject forKey:@"feed"];
 	}
 }
 - (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement intoContext:(NSManagedObjectContext *)ctx
@@ -75,8 +77,10 @@
 	for (NSXMLElement *channel in [channelElement elementsForName:@"item"])
 	{
 		NSManagedObject *itemObject = [self parseItemElement:channel context:ctx];
-		//FIXME: Add post to channel relationship set
+		[itemObject setValue:item forKey:@"channel"];
 	}
+	
+	return item;
 }
 - (NSManagedObject *)parseItemElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx
 {
@@ -84,18 +88,17 @@
 	
 	NSManagedObject *item = [[NSManagedObject alloc] initWithEntity:postsEntity insertIntoManagedObjectContext:ctx];
 	
-	//Required properties (although we don't require them)
+	//RSS Required properties (although we don't require them)
 	[self addSubelementFrom:itemElement name:@"title" into:item key:@"title"];
 	[self addSubelementFrom:itemElement name:@"description" into:item key:@"contents"];
 	[self addSubelementFrom:itemElement name:@"link" into:item key:@"URL"];
 	
-	//Optional properties
+	//RSS Optional properties
 	[self addSubelementFrom:itemElement name:@"author" into:item key:@"authorEmail"];
 	[self addSubelementFrom:itemElement name:@"category" into:item key:@"category"];
 	[self addSubelementFrom:itemElement name:@"comments" into:item key:@"commentsURL"];
 	[self addSubelementFrom:itemElement name:@"source" into:item key:@"source"];
 	[self addSubelementFrom:itemElement name:@"guid" into:item key:@"uuid"];
-	[self addSubelementFrom:itemElement name:@"pubDate" into:item key:@"URL"];
 	
 	//Publication Date
 	NSArray *pubDateElements = [itemElement elementsForName:@"pubDate"];
@@ -115,8 +118,10 @@
 	for (NSXMLElement *channel in [itemElement elementsForName:@"enclosure"])
 	{
 		NSManagedObject *enclosureObject = [self parseEnclosureElement:channel context:ctx];
-		//FIXME: Add enclosure to post relationship set
+		[enclosureObject setValue:item forKey:@"post"];
 	}
+	
+	return item;
 }
 - (NSManagedObject *)parseEnclosureElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx
 {

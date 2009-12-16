@@ -30,6 +30,8 @@
 	HEReaderWindowController *reader = [[HEReaderWindowController alloc] init];	
 	[readerWindowControllers addObject:reader];
 	
+	[refresher refresh];
+	
 	[reader showWindow:nil];
 }
 

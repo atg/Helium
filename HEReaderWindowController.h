@@ -7,14 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 
+@class HEPostListView;
 
 @interface HEReaderWindowController : NSWindowController {
+	IBOutlet HEPostListView *postsView;
+	IBOutlet NSObjectController *postController;
+	
+	IBOutlet WebView *postWebView;
+	
 	IBOutlet NSTextField *addFeedURLField;
 	IBOutlet NSSegmentedControl *addFeedImportance;
 }
 
-- (void)addFeedURLField:(id)sender;
 - (BOOL)shouldCloseSheet:(id)sender;
 
 @end
