@@ -65,6 +65,9 @@
 	
 	// http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&feed=rss
 	
+	[ctx save:nil];
+	[ctx reset];
+	
 	[[HERefresher globalRefresher] refresh];
 	
 	return YES;

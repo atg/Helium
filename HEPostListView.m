@@ -70,14 +70,16 @@
 	NSManagedObjectContext *ctx = [(Helium_AppDelegate *)[NSApp delegate] managedObjectContext];
 	
 	NSFetchRequest *fetchFeedsRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *postsEntity = [NSEntityDescription entityForName:@"Feed" inManagedObjectContext:ctx];
+	NSEntityDescription *postsEntity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:ctx];
 	[fetchFeedsRequest setEntity:postsEntity];
 	
+	/*
 	[fetchFeedsRequest setSortDescriptors:
 	 [NSArray arrayWithObject:
 	  [NSSortDescriptor sortDescriptorWithKey:@"importance" ascending:NO]
 	  ]
 	 ];
+	 */
 	
 	NSError *err = nil;
 	NSArray *postObjects = [ctx executeFetchRequest:fetchFeedsRequest error:&err];
@@ -88,7 +90,7 @@
 		HEPostListItemLayer *layer = [[HEPostListItemLayer alloc] init];
 		layer.frame = CGRectMake(20, previousMaxY, [self bounds].size.width - 40, 66);
 		
-		previousMaxY = layer.frame.origin.y + layer.frame.size.height;
+		previousMaxY = layer.frame.origin.y + layer.frame.size.height + 11;
 		
 		[posts addObject:layer];
 		[[self layer] addSublayer:layer];
@@ -98,9 +100,16 @@
 			layer.isSelected = YES;			
 			selectedLayer = layer;
 		}
+		
+		[layer setNeedsDisplay];
 	}
 	
 	[[self layer] setNeedsDisplay];
+	[self sizeToFit];
+}
+- (void)sizeToFit
+{
+	
 }
 - (void)removeAllItems
 {
@@ -109,6 +118,8 @@
 		[post removeFromSuperlayer];
 	}
 	[posts removeAllObjects];
+	
+	selectedLayer = nil;
 	
 	[[self layer] setNeedsDisplay];
 }

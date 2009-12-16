@@ -134,7 +134,7 @@
 	if ([string length])
 		[mo setValue:string forKey:key];
 	
-	NSLog(@"Set key/value pair: %@, %@", key, string);
+	//NSLog(@"Set key/value pair: %@, %@", key, string);
 	
 	return YES;
 }

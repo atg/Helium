@@ -46,6 +46,7 @@
 		
 		NSError *err = nil;
 		NSArray *feeds = [ctx executeFetchRequest:fetchFeedsRequest error:&err];
+		NSLog(@"feeds = %@", feeds);
 		
 		for (NSManagedObject *feed in feeds)
 		{
@@ -58,6 +59,9 @@
 			HERSSParser *parser = [[HERSSParser alloc] initWithURL:url];
 			[parser parseIntoContext:ctx];
 		}
+		
+		[ctx save:nil];
+		[ctx reset];
 		
 		//Hop back onto the main thread to finish up
 		dispatch_async(dispatch_get_main_queue(), ^{
