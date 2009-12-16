@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
+		7509BD5810D9590700ED6FAC /* HEParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509BD5710D9590700ED6FAC /* HEParser.m */; };
+		7509BD7B10D95B0400ED6FAC /* HEAtomParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509BD7A10D95B0400ED6FAC /* HEAtomParser.m */; };
+		7509BD9810D95C3D00ED6FAC /* HEPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7509BD9710D95C3D00ED6FAC /* HEPreferences.xib */; };
+		7509BDD110D9625B00ED6FAC /* HEPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509BDD010D9625B00ED6FAC /* HEPreferencesWindowController.m */; };
 		75E91C4D10D81A480045E672 /* HEReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E91C4C10D81A480045E672 /* HEReader.xib */; };
 		75E91C5010D81C640045E672 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */; };
 		75E91C8310D81C7B0045E672 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */; };
@@ -21,7 +25,7 @@
 		75E91D5C10D864990045E672 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E91D5B10D864990045E672 /* QuartzCore.framework */; };
 		75E920E610D8797B0045E672 /* HERefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E920E510D8797B0045E672 /* HERefresher.m */; };
 		770B37ED0679A11B001EADE2 /* Helium_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* Helium_DataModel.xcdatamodel */; };
-		77C8280E06725ACE000B614F /* Helium_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* Helium_AppDelegate.m */; };
+		77C8280E06725ACE000B614F /* HEApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* HEApplicationDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -48,6 +52,13 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		2F7446980DB6B7EA00F9684A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Helium_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helium_Prefix.pch; sourceTree = "<group>"; };
+		7509BD5610D9590700ED6FAC /* HEParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEParser.h; sourceTree = "<group>"; };
+		7509BD5710D9590700ED6FAC /* HEParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEParser.m; sourceTree = "<group>"; };
+		7509BD7910D95B0400ED6FAC /* HEAtomParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEAtomParser.h; sourceTree = "<group>"; };
+		7509BD7A10D95B0400ED6FAC /* HEAtomParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEAtomParser.m; sourceTree = "<group>"; };
+		7509BD9710D95C3D00ED6FAC /* HEPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HEPreferences.xib; sourceTree = "<group>"; };
+		7509BDCF10D9625B00ED6FAC /* HEPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEPreferencesWindowController.h; sourceTree = "<group>"; };
+		7509BDD010D9625B00ED6FAC /* HEPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEPreferencesWindowController.m; sourceTree = "<group>"; };
 		75E91C4C10D81A480045E672 /* HEReader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HEReader.xib; sourceTree = "<group>"; };
 		75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
 		75E91C8A10D81E9F0045E672 /* HEReaderWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEReaderWindowController.h; sourceTree = "<group>"; };
@@ -68,8 +79,8 @@
 		75E920E510D8797B0045E672 /* HERefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HERefresher.m; sourceTree = "<group>"; };
 		770B37EC0679A11B001EADE2 /* Helium_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Helium_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		77C8280B06725ACE000B614F /* Helium_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helium_AppDelegate.h; sourceTree = "<group>"; };
-		77C8280C06725ACE000B614F /* Helium_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helium_AppDelegate.m; sourceTree = "<group>"; };
+		77C8280B06725ACE000B614F /* HEApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEApplicationDelegate.h; sourceTree = "<group>"; };
+		77C8280C06725ACE000B614F /* HEApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEApplicationDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Helium-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Helium-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Helium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Helium.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -92,20 +103,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				77C8280B06725ACE000B614F /* Helium_AppDelegate.h */,
-				77C8280C06725ACE000B614F /* Helium_AppDelegate.m */,
-				75E920E410D8797B0045E672 /* HERefresher.h */,
-				75E920E510D8797B0045E672 /* HERefresher.m */,
-				75E91C8A10D81E9F0045E672 /* HEReaderWindowController.h */,
-				75E91C8B10D81E9F0045E672 /* HEReaderWindowController.m */,
-				75E91C8F10D81EBF0045E672 /* HEPostListView.h */,
-				75E91C9010D81EBF0045E672 /* HEPostListView.m */,
-				75E91D5810D864730045E672 /* HEPostListItemLayer.h */,
-				75E91D5910D864730045E672 /* HEPostListItemLayer.m */,
-				75E91CD010D827D90045E672 /* HEBannerView.h */,
-				75E91CD110D827D90045E672 /* HEBannerView.m */,
-				75E91CFE10D831410045E672 /* HERSSParser.h */,
-				75E91CFF10D831410045E672 /* HERSSParser.m */,
+				7509BD8E10D95BF900ED6FAC /* Controllers */,
+				7509BD9110D95C0C00ED6FAC /* Views */,
+				7509BD7610D95AF900ED6FAC /* Parsing */,
+				7509BD9410D95C1F00ED6FAC /* Misc */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -156,8 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				32CA4F630368D1EE00C91783 /* Helium_Prefix.pch */,
-				75E91D0D10D842320045E672 /* HERSSDateParser.h */,
-				75E91D0E10D842320045E672 /* HERSSDateParser.m */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -170,6 +169,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
 				75E91C4C10D81A480045E672 /* HEReader.xib */,
+				7509BD9710D95C3D00ED6FAC /* HEPreferences.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -181,6 +181,56 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7509BD7610D95AF900ED6FAC /* Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				7509BD5610D9590700ED6FAC /* HEParser.h */,
+				7509BD5710D9590700ED6FAC /* HEParser.m */,
+				75E91CFE10D831410045E672 /* HERSSParser.h */,
+				75E91CFF10D831410045E672 /* HERSSParser.m */,
+				7509BD7910D95B0400ED6FAC /* HEAtomParser.h */,
+				7509BD7A10D95B0400ED6FAC /* HEAtomParser.m */,
+			);
+			name = Parsing;
+			sourceTree = "<group>";
+		};
+		7509BD8E10D95BF900ED6FAC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				77C8280B06725ACE000B614F /* HEApplicationDelegate.h */,
+				77C8280C06725ACE000B614F /* HEApplicationDelegate.m */,
+				75E920E410D8797B0045E672 /* HERefresher.h */,
+				75E920E510D8797B0045E672 /* HERefresher.m */,
+				75E91C8A10D81E9F0045E672 /* HEReaderWindowController.h */,
+				75E91C8B10D81E9F0045E672 /* HEReaderWindowController.m */,
+				7509BDCF10D9625B00ED6FAC /* HEPreferencesWindowController.h */,
+				7509BDD010D9625B00ED6FAC /* HEPreferencesWindowController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7509BD9110D95C0C00ED6FAC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				75E91C8F10D81EBF0045E672 /* HEPostListView.h */,
+				75E91C9010D81EBF0045E672 /* HEPostListView.m */,
+				75E91D5810D864730045E672 /* HEPostListItemLayer.h */,
+				75E91D5910D864730045E672 /* HEPostListItemLayer.m */,
+				75E91CD010D827D90045E672 /* HEBannerView.h */,
+				75E91CD110D827D90045E672 /* HEBannerView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7509BD9410D95C1F00ED6FAC /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				75E91D0D10D842320045E672 /* HERSSDateParser.h */,
+				75E91D0E10D842320045E672 /* HERSSDateParser.m */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		7756732906782D8800D1FEB8 /* Models */ = {
@@ -238,6 +288,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
 				75E91C4D10D81A480045E672 /* HEReader.xib in Resources */,
+				7509BD9810D95C3D00ED6FAC /* HEPreferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				77C8280E06725ACE000B614F /* Helium_AppDelegate.m in Sources */,
+				77C8280E06725ACE000B614F /* HEApplicationDelegate.m in Sources */,
 				770B37ED0679A11B001EADE2 /* Helium_DataModel.xcdatamodel in Sources */,
 				75E91C8C10D81E9F0045E672 /* HEReaderWindowController.m in Sources */,
 				75E91C9110D81EBF0045E672 /* HEPostListView.m in Sources */,
@@ -258,6 +309,9 @@
 				75E91D0F10D842320045E672 /* HERSSDateParser.m in Sources */,
 				75E91D5A10D864730045E672 /* HEPostListItemLayer.m in Sources */,
 				75E920E610D8797B0045E672 /* HERefresher.m in Sources */,
+				7509BD5810D9590700ED6FAC /* HEParser.m in Sources */,
+				7509BD7B10D95B0400ED6FAC /* HEAtomParser.m in Sources */,
+				7509BDD110D9625B00ED6FAC /* HEPreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

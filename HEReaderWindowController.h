@@ -9,9 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
-@class HEPostListView;
+#import "HEPostListView.h"
 
-@interface HEReaderWindowController : NSWindowController {
+@interface HEReaderWindowController : NSWindowController<HEPostListViewDelegate> {
 	IBOutlet HEPostListView *postsView;
 	IBOutlet NSObjectController *postController;
 	

@@ -8,7 +8,7 @@
 
 #import "HEPostListView.h"
 #import "HEPostListItemLayer.h"
-#import "Helium_AppDelegate.h"
+#import "HEApplicationDelegate.h"
 
 @interface HEPostListView ()
 
@@ -73,7 +73,7 @@
 {
 	[self removeAllItems];
 	
-	NSManagedObjectContext *ctx = [(Helium_AppDelegate *)[NSApp delegate] managedObjectContext];
+	NSManagedObjectContext *ctx = [(HEApplicationDelegate *)[NSApp delegate] managedObjectContext];
 	
 	NSFetchRequest *fetchFeedsRequest = [[NSFetchRequest alloc] init];
 	NSEntityDescription *postsEntity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:ctx];

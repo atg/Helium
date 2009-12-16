@@ -14,6 +14,7 @@
 
 @protocol HEPostListViewDelegate<NSObject>
 
+- (void)postListDidResize:(HEPostListView *)listView;
 - (void)postListSelectionDidChange:(HEPostListView *)listView;
 
 @end

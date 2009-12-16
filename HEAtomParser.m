@@ -1,16 +1,15 @@
 //
-//  HERSSParser.m
+//  HEAtomParser.m
 //  Helium
 //
-//  Created by Alex Gordon on 15/12/2009.
+//  Created by Alex Gordon on 16/12/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "HERSSParser.h"
-#import "HERSSDateParser.h"
+#import "HEAtomParser.h"
 
 
-@implementation HERSSParser
+@implementation HEAtomParser
 
 - (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement feed:(NSManagedObject *)feed context:(NSManagedObjectContext *)ctx
 {

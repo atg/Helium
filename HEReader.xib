@@ -224,8 +224,8 @@
 													</object>
 													<object class="NSMutableArray" key="dict.values">
 														<bool key="EncodedWithXMLCoder">YES</bool>
-														<integer value="14"/>
-														<integer value="14"/>
+														<integer value="12"/>
+														<integer value="12"/>
 														<integer value="1"/>
 													</object>
 												</object>
@@ -454,7 +454,7 @@
 						</object>
 						<object class="NSCustomView" id="834625576">
 							<reference key="NSNextResponder" ref="1006"/>
-							<int key="NSvFlags">268</int>
+							<int key="NSvFlags">292</int>
 							<object class="NSMutableArray" key="NSSubviews">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSButton" id="877978173">
@@ -1392,9 +1392,9 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{293, 169}, {854, 578}}</string>
+					<string>{{223, 169}, {854, 578}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{293, 169}, {854, 578}}</string>
+					<string>{{223, 169}, {854, 578}}</string>
 					<boolean value="NO"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>

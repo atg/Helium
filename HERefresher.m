@@ -8,7 +8,15 @@
 
 #import "HERefresher.h"
 #import "HERSSParser.h"
-#import "Helium_AppDelegate.h"
+#import "HEApplicationDelegate.h"
+
+@interface HERefresher ()
+
+- (void)scheduleTimer;
+- (void)refreshTimerFired;
+
+@end
+
 
 @implementation HERefresher
 
@@ -17,6 +25,42 @@
 	return [[NSApp delegate] refresher];
 }
 
+- (id)init
+{
+	if (self = [super init])
+	{
+		firstStart = [NSDate timeIntervalSinceReferenceDate];
+		
+		[self scheduleTimer];
+	}
+	return self;
+}
+- (void)scheduleTimer
+{
+	NSInteger refreshIntervalInt = [[NSUserDefaults standardUserDefaults] integerForKey:@"HERefreshInterval"];
+	NSLog(@"refreshIntervalInt = %d", refreshIntervalInt);
+	NSTimeInterval refreshInterval = 0.0;
+	if (refreshIntervalInt >= 30) //30 seconds is the minimum
+		refreshInterval = (NSTimeInterval)refreshIntervalInt;
+	else
+		refreshInterval = 600.0; //600 seconds is the default		
+	
+	[self performSelector:@selector(refreshTimerFired) withObject:nil afterDelay:refreshInterval];	
+}
+- (void)refreshTimerFired
+{
+	NSLog(@"Timer fired at %lf", [NSDate timeIntervalSinceReferenceDate] - firstStart);
+	@try {
+		[self refresh];
+	}
+	@catch (NSException * e) {
+		
+	}
+	
+	[self scheduleTimer];
+}
+
+
 - (void)refresh
 {
 	//If we're already refreshing, bail
@@ -24,7 +68,7 @@
 		return;
 	
 	//Get the managed object context for the background tasks
-	NSManagedObjectContext *ctx = [(Helium_AppDelegate *)[NSApp delegate] managedObjectContextForBackgroundRefresh];
+	NSManagedObjectContext *ctx = [(HEApplicationDelegate *)[NSApp delegate] managedObjectContextForBackgroundRefresh];
 	
 	//No context? Bail
 	if (!ctx)

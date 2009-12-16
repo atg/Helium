@@ -1,8 +1,8 @@
 //
-//  HERSSParser.h
+//  HEAtomParser.h
 //  Helium
 //
-//  Created by Alex Gordon on 15/12/2009.
+//  Created by Alex Gordon on 16/12/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 #import "HEParser.h"
 
-@interface HERSSParser : HEParser
-{
+@interface HEAtomParser : HEParser {
 
 }
 

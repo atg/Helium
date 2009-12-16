@@ -11,6 +11,8 @@
 
 @interface HERefresher : NSObject
 {
+	NSTimeInterval firstStart;
+	
 	//Only one refresh is allowed at any one time. This variable must only be set in the main thread
 	BOOL refreshIsInProgress;
 }
