@@ -46,20 +46,20 @@
 	for (NSXMLElement *channel in [[xml rootElement] elementsForName:@"channel"])
 	{
 		NSManagedObject *channelObject = [self parseChannelElement:channel intoContext:ctx];
+		//FIXME: Add channel to feed relationship set
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"HERSSParser_ParsedDocument" object:self];
 }
 - (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement intoContext:(NSManagedObjectContext *)ctx
 {
-	NSEntityDescription *feedsEntity = [NSEntityDescription entityForName:@"Feed" inManagedObjectContext:ctx];
+	NSEntityDescription *feedsEntity = [NSEntityDescription entityForName:@"Channel" inManagedObjectContext:ctx];
 	
 	NSManagedObject *item = [[NSManagedObject alloc] initWithEntity:feedsEntity insertIntoManagedObjectContext:ctx];
 	
 	[self addSubelementFrom:channelElement name:@"title" into:item key:@"name"];
 	[self addSubelementFrom:channelElement name:@"description" into:item key:@"summary"];
 	[self addSubelementFrom:channelElement name:@"link" into:item key:@"URL"];
-	[item setValue:[url absoluteString] forKey:@"rssURL"];
 	
 	if (![self addSubelementFrom:channelElement name:@"managingEditor" into:item key:@"emailAddress"])
 		[self addSubelementFrom:channelElement name:@"webMaster" into:item key:@"emailAddress"];
@@ -77,6 +77,7 @@
 	for (NSXMLElement *channel in [channelElement elementsForName:@"item"])
 	{
 		NSManagedObject *itemObject = [self parseItemElement:channel context:ctx];
+		//FIXME: Add post to channel relationship set
 	}
 }
 - (NSManagedObject *)parseItemElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx
@@ -116,6 +117,7 @@
 	for (NSXMLElement *channel in [itemElement elementsForName:@"enclosure"])
 	{
 		NSManagedObject *enclosureObject = [self parseEnclosureElement:channel context:ctx];
+		//FIXME: Add enclosure to post relationship set
 	}
 }
 - (NSManagedObject *)parseEnclosureElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx

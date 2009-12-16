@@ -10,7 +10,11 @@
 
 
 @interface HEReaderWindowController : NSWindowController {
-
+	IBOutlet NSTextField *addFeedURLField;
+	IBOutlet NSSegmentedControl *addFeedImportance;
 }
+
+- (void)addFeedURLField:(id)sender;
+- (BOOL)shouldCloseSheet:(id)sender;
 
 @end
