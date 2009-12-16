@@ -42,16 +42,17 @@
 {
 	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
 	
-	float fontSize = (small ? 13 : 11);
+	float fontSize = (small ? 11.0 : 13.0);
 	if (selected)
-		[dict setValue:[NSFont boldSystemFontOfSize:small] forKey:NSFontAttributeName];
+		[dict setValue:[NSFont boldSystemFontOfSize:fontSize] forKey:NSFontAttributeName];
 	else
-		[dict setValue:[NSFont systemFontOfSize:small] forKey:NSFontAttributeName];
+		[dict setValue:[NSFont systemFontOfSize:fontSize] forKey:NSFontAttributeName];
 	
+	float alpha = (small ? 0.9 : 1.0);
 	if (selected)
-		[dict setValue:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+		[dict setValue:[NSColor colorWithCalibratedWhite:1.0 alpha:alpha] forKey:NSForegroundColorAttributeName];
 	else
-		[dict setValue:[NSColor colorWithCalibratedRed:0.243 green:0.288 blue:0.335 alpha:1.000] forKey:NSForegroundColorAttributeName];
+		[dict setValue:[NSColor colorWithCalibratedRed:0.243 green:0.288 blue:0.335 alpha:alpha] forKey:NSForegroundColorAttributeName];
 	
 	NSShadow *shadow = [[NSShadow alloc] init];
 	[shadow setShadowOffset:NSMakeSize(0.0, -1.0)];
@@ -144,18 +145,41 @@
 	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:ctx flipped:YES]];
 	
 	//Draw Text
-	NSDictionary *attributes = [self attributesForSelected:isSelected small:NO];
+	const float leftTextMargin = 9.0;
+	const float rightTextMargin = 8.0;
+	const float topTextMargin = 6.0;
+	const float betweenLineTextMargin = 4.0;
+	const float bottomTextMargin = 7.0;
+	
+	NSRect bounds = [self bounds];
+	
+	NSDictionary *bigAttributes = [self attributesForSelected:isSelected small:NO];
+	NSSize bigSize = [title sizeWithAttributes:bigAttributes];
+	
+	NSDictionary *smallAttributes = [self attributesForSelected:isSelected small:YES];
+	NSSize smallSize = [source sizeWithAttributes:smallAttributes];
+	
+	NSRect titleRect = NSMakeRect(leftTextMargin, topTextMargin, bounds.size.width - leftTextMargin - rightTextMargin, bounds.size.height - topTextMargin - betweenLineTextMargin - smallSize.height - bottomTextMargin);
+	[title drawInRect:titleRect withAttributes:bigAttributes];
+	
+	NSRect sourceRect = NSMakeRect(titleRect.origin.x, NSMaxY(titleRect) + betweenLineTextMargin, titleRect.size.width, smallSize.height);
+	[source drawInRect:sourceRect withAttributes:smallAttributes];
+	
+	
+	/*
+	topTextMargin
+	
 	NSSize size = [title sizeWithAttributes:attributes];
-	NSRect titleRect = NSMakeRect(20, 20, [self bounds].size.width - 24.0, 30);
-	//[title drawInRect:rect withAttributes:attributes];
-	[title drawAtPoint:NSMakePoint(30, [self bounds].size.height - 60) withAttributes:attributes];
+	NSRect titleRect = NSMakeRect(leftTextMargin, 8, [self bounds].size.width - 24.0, 24);
+	[title drawInRect:titleRect withAttributes:attributes];
+	//[title drawAtPoint:NSMakePoint(30, [self bounds].size.height - 60) withAttributes:attributes];
 	
 	attributes = [self attributesForSelected:isSelected small:YES];
-	size = [source sizeWithAttributes:attributes];
-	NSRect sourceRect = NSMakeRect(20, 20, [self bounds].size.width - 24.0, 30);
+	//size = [source sizeWithAttributes:attributes];
+	//NSRect sourceRect = NSMakeRect(20, 20, [self bounds].size.width - 24.0, 30);
 	//[title drawInRect:rect withAttributes:attributes];
-	[source drawAtPoint:NSMakePoint(30, [self bounds].size.height - 60) withAttributes:attributes];
-	
+	[source drawAtPoint:NSMakePoint(leftTextMargin, [self bounds].size.height - 30) withAttributes:attributes];
+	*/
 	[NSGraphicsContext setCurrentContext:oldContext];
 }
 

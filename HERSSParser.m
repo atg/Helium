@@ -141,8 +141,6 @@
 
 - (NSManagedObject *)getOrCreateWithEntity:(NSEntityDescription *)entity parent:(NSManagedObject *)parent parentKey:(NSString *)parentKey key:(NSString *)key value:(id)value context:(NSManagedObjectContext *)ctx
 {	
-	NSLog(@"Get or create with entity:%@\n parent:%@\n key:%@\n value:%@\n context:%@\n", entity, parent, key, value, ctx);
-	
 	NSFetchRequest *getExistingChannelRequest = [[NSFetchRequest alloc] init];
 	[getExistingChannelRequest setPredicate:[NSPredicate predicateWithFormat:@"%K=%@ && %K=%@", key, value, parentKey, parent]];
 	[getExistingChannelRequest setEntity:entity];
