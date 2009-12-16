@@ -8,6 +8,16 @@
 
 #import "HEPostListView.h"
 #import "HEPostListItemLayer.h"
+#import "Helium_AppDelegate.h"
+
+@interface HEPostListView ()
+
+- (void)refresh;
+- (void)refreshedModel:(NSNotification *)notif;
+- (void)removeAllItems;
+
+@end
+
 
 @implementation HEPostListView
 
@@ -16,6 +26,8 @@
 	if (self = [super initWithFrame:frame])
 	{
 		posts = [[NSMutableArray alloc] init];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshedModel:) name:@"HERefresher_Refreshed" object:nil];
 	}
 	return self;
 }
@@ -46,6 +58,59 @@
 	layer3.isSelected = NO;
 	[posts addObject:layer3];
 	[[self layer] addSublayer:layer3];
+}
+- (void)refreshedModel:(NSNotification *)notif
+{
+	[self refresh];
+}
+- (void)refresh
+{
+	[self removeAllItems];
+	
+	NSManagedObjectContext *ctx = [(Helium_AppDelegate *)[NSApp delegate] managedObjectContext];
+	
+	NSFetchRequest *fetchFeedsRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *postsEntity = [NSEntityDescription entityForName:@"Feed" inManagedObjectContext:ctx];
+	[fetchFeedsRequest setEntity:postsEntity];
+	
+	[fetchFeedsRequest setSortDescriptors:
+	 [NSArray arrayWithObject:
+	  [NSSortDescriptor sortDescriptorWithKey:@"importance" ascending:NO]
+	  ]
+	 ];
+	
+	NSError *err = nil;
+	NSArray *postObjects = [ctx executeFetchRequest:fetchFeedsRequest error:&err];
+	
+	float previousMaxY = 20.0;
+	for (NSManagedObject *postObject in postObjects)
+	{
+		HEPostListItemLayer *layer = [[HEPostListItemLayer alloc] init];
+		layer.frame = CGRectMake(20, previousMaxY, [self bounds].size.width - 40, 66);
+		
+		previousMaxY = layer.frame.origin.y + layer.frame.size.height;
+		
+		[posts addObject:layer];
+		[[self layer] addSublayer:layer];
+		
+		if (selectedLayer == nil)
+		{
+			layer.isSelected = YES;			
+			selectedLayer = layer;
+		}
+	}
+	
+	[[self layer] setNeedsDisplay];
+}
+- (void)removeAllItems
+{
+	for (HEPostListItemLayer *post in posts)
+	{
+		[post removeFromSuperlayer];
+	}
+	[posts removeAllObjects];
+	
+	[[self layer] setNeedsDisplay];
 }
 
 - (void)drawRect:(NSRect)dirtyRect

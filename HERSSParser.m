@@ -48,8 +48,6 @@
 		NSManagedObject *channelObject = [self parseChannelElement:channel intoContext:ctx];
 		//FIXME: Add channel to feed relationship set
 	}
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"HERSSParser_ParsedDocument" object:self];
 }
 - (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement intoContext:(NSManagedObjectContext *)ctx
 {
@@ -135,6 +133,8 @@
 	NSString *string = [[elements objectAtIndex:0] stringValue];
 	if ([string length])
 		[mo setValue:string forKey:key];
+	
+	NSLog(@"Set key/value pair: %@, %@", key, string);
 	
 	return YES;
 }

@@ -8,14 +8,18 @@
 
 #import "Helium_AppDelegate.h"
 #import "HEReaderWindowController.h"
+#import "HERefresher.h"
 
 @implementation Helium_AppDelegate
+
+@synthesize refresher;
 
 - (id) init
 {
 	if (self = [super init])
 	{
 		readerWindowControllers = [[NSMutableArray alloc] init];
+		refresher = [[HERefresher alloc] init];
 	}
 	return self;
 }
@@ -112,10 +116,12 @@
  
 - (NSManagedObjectContext *) managedObjectContext {
 
-    if (managedObjectContext) return managedObjectContext;
+    if (managedObjectContext)
+		return managedObjectContext;
 
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
+    if (!coordinator)
+	{
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setValue:@"Failed to initialize the store" forKey:NSLocalizedDescriptionKey];
         [dict setValue:@"There was an error building up the data file." forKey:NSLocalizedFailureReasonErrorKey];
@@ -127,6 +133,24 @@
     [managedObjectContext setPersistentStoreCoordinator: coordinator];
 
     return managedObjectContext;
+}
+
+- (NSManagedObjectContext *)managedObjectContextForBackgroundRefresh
+{
+	
+    if (managedObjectContextForBackgroundRefresh)
+		return managedObjectContextForBackgroundRefresh;
+	
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator)
+	{
+        return nil;
+    }
+	
+    managedObjectContextForBackgroundRefresh = [[NSManagedObjectContext alloc] init];
+    [managedObjectContextForBackgroundRefresh setPersistentStoreCoordinator: coordinator];
+	
+    return managedObjectContextForBackgroundRefresh;
 }
 
 /**

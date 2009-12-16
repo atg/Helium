@@ -8,6 +8,8 @@
 
 #import "HEReaderWindowController.h"
 
+#import "HERefresher.h"
+
 @interface HEReaderWindowController ()
 
 - (BOOL)validateAddFeedURL;
@@ -58,7 +60,12 @@
 	NSEntityDescription *feedsEntity = [NSEntityDescription entityForName:@"Feed" inManagedObjectContext:ctx];
 	NSManagedObject *item = [[NSManagedObject alloc] initWithEntity:feedsEntity insertIntoManagedObjectContext:ctx];
 	
-	[item setValue:[addFeedURLField stringValue] forKey:@"rssURL"];
+	[item setValue:[addFeedURLField stringValue] forKey:@"URL"];
+	[item setValue:[NSNumber numberWithInt:[addFeedImportance tag]] forKey:@"importance"];
+	
+	// http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&feed=rss
+	
+	[[HERefresher globalRefresher] refresh];
 	
 	return YES;
 }
