@@ -17,6 +17,8 @@
 		75E91CD210D827D90045E672 /* HEBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E91CD110D827D90045E672 /* HEBannerView.m */; };
 		75E91D0010D831410045E672 /* HERSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E91CFF10D831410045E672 /* HERSSParser.m */; };
 		75E91D0F10D842320045E672 /* HERSSDateParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E91D0E10D842320045E672 /* HERSSDateParser.m */; };
+		75E91D5A10D864730045E672 /* HEPostListItemLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E91D5910D864730045E672 /* HEPostListItemLayer.m */; };
+		75E91D5C10D864990045E672 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E91D5B10D864990045E672 /* QuartzCore.framework */; };
 		770B37ED0679A11B001EADE2 /* Helium_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* Helium_DataModel.xcdatamodel */; };
 		77C8280E06725ACE000B614F /* Helium_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* Helium_AppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -58,6 +60,9 @@
 		75E91CFF10D831410045E672 /* HERSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HERSSParser.m; sourceTree = "<group>"; };
 		75E91D0D10D842320045E672 /* HERSSDateParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HERSSDateParser.h; sourceTree = "<group>"; };
 		75E91D0E10D842320045E672 /* HERSSDateParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HERSSDateParser.m; sourceTree = "<group>"; };
+		75E91D5810D864730045E672 /* HEPostListItemLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEPostListItemLayer.h; sourceTree = "<group>"; };
+		75E91D5910D864730045E672 /* HEPostListItemLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEPostListItemLayer.m; sourceTree = "<group>"; };
+		75E91D5B10D864990045E672 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		770B37EC0679A11B001EADE2 /* Helium_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Helium_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* Helium_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helium_AppDelegate.h; sourceTree = "<group>"; };
@@ -74,6 +79,7 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				75E91C5010D81C640045E672 /* BWToolkitFramework.framework in Frameworks */,
 				75E91CB410D827980045E672 /* WebKit.framework in Frameworks */,
+				75E91D5C10D864990045E672 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +95,8 @@
 				75E91C8B10D81E9F0045E672 /* HEReaderWindowController.m */,
 				75E91C8F10D81EBF0045E672 /* HEPostListView.h */,
 				75E91C9010D81EBF0045E672 /* HEPostListView.m */,
+				75E91D5810D864730045E672 /* HEPostListItemLayer.h */,
+				75E91D5910D864730045E672 /* HEPostListItemLayer.m */,
 				75E91CD010D827D90045E672 /* HEBannerView.h */,
 				75E91CD110D827D90045E672 /* HEBannerView.m */,
 				75E91CFE10D831410045E672 /* HERSSParser.h */,
@@ -103,6 +111,7 @@
 				75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				75E91CB310D827980045E672 /* WebKit.framework */,
+				75E91D5B10D864990045E672 /* QuartzCore.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -242,6 +251,7 @@
 				75E91CD210D827D90045E672 /* HEBannerView.m in Sources */,
 				75E91D0010D831410045E672 /* HERSSParser.m in Sources */,
 				75E91D0F10D842320045E672 /* HERSSDateParser.m in Sources */,
+				75E91D5A10D864730045E672 /* HEPostListItemLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

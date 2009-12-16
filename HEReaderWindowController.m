@@ -11,6 +11,15 @@
 
 @implementation HEReaderWindowController
 
+- (id)init
+{
+	if (self = [super initWithWindowNibName:@"HEReader"])
+	{
+		
+	}
+	return self;
+}
+
 - (void)windowDidLoad
 {
 	[[self window] center];

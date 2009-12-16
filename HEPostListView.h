@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <QuartzCore/QuartzCore.h>
 
 
-@interface HEPostListView : NSView {
-
+@interface HEPostListView : NSView
+{
+	NSMutableArray *posts;
 }
 
 @end

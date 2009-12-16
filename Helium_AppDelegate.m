@@ -23,7 +23,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-	HEReaderWindowController *reader = [[HEReaderWindowController alloc] initWithWindowNibName:@"HEReader"];	
+	HEReaderWindowController *reader = [[HEReaderWindowController alloc] init];	
 	[readerWindowControllers addObject:reader];
 	
 	[reader showWindow:nil];
