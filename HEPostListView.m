@@ -16,6 +16,9 @@
 - (void)refreshedModel:(NSNotification *)notif;
 - (void)removeAllItems;
 
+- (void)sizeToFit;
+- (NSRect)sizeFrameToFit:(NSRect)frame;
+
 @end
 
 
@@ -109,8 +112,31 @@
 }
 - (void)sizeToFit
 {
-	
+	NSRect frame = [self frame];
+	frame = [self sizeFrameToFit:frame];
+	[super setFrame:frame];
 }
+- (NSRect)sizeFrameToFit:(NSRect)frame
+{
+	float maxY = [[self superview] frame].size.height;
+	for (HEPostListItemLayer *post in posts)
+	{
+		float y = post.frame.origin.y + post.frame.size.height;
+		if (y > maxY)
+			maxY = y;
+	}
+	maxY += 20.0;
+	
+	frame.size.height = maxY;
+	return frame;
+}
+- (void)setFrame:(NSRect)newFrame
+{
+	newFrame = [self sizeFrameToFit:newFrame];
+	[super setFrame:newFrame];
+}
+
+
 - (void)removeAllItems
 {
 	for (HEPostListItemLayer *post in posts)
