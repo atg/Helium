@@ -91,8 +91,12 @@
 	NSArray *postObjects = [ctx executeFetchRequest:fetchFeedsRequest error:&err];
 	
 	float previousMaxY = 20.0;
+	int count = 0;
 	for (NSManagedObject *postObject in postObjects)
 	{
+		if (count + 1 > 10)
+			break;
+		
 		HEPostListItemLayer *layer = [[HEPostListItemLayer alloc] init];
 		layer.frame = CGRectMake(20, previousMaxY, [self bounds].size.width - 40, 66);
 		layer.title = [postObject valueForKey:@"title"];
@@ -111,6 +115,7 @@
 		}
 		
 		[layer setNeedsDisplay];
+		count++;
 	}
 	
 	[[self layer] setNeedsDisplay];
@@ -118,9 +123,14 @@
 }
 - (void)sizeToFit
 {
+	[CATransaction begin];
+	//[CATransaction setAnimationDuration:0.0];
+	
 	NSRect frame = [self frame];
 	frame = [self sizeFrameToFit:frame];
 	[super setFrame:frame];
+	
+	[CATransaction commit];
 }
 - (NSRect)sizeFrameToFit:(NSRect)frame
 {
@@ -141,6 +151,11 @@
 {
 	newFrame = [self sizeFrameToFit:newFrame];
 	[super setFrame:newFrame];
+	
+	if ([delegate respondsToSelector:@selector(postListDidResize:)])
+	{
+		[delegate postListDidResize:self];
+	}
 }
 
 
@@ -195,7 +210,6 @@
 	if ([delegate respondsToSelector:@selector(postListSelectionDidChange:)])
 	{
 		[delegate postListSelectionDidChange:self];
-		
 	}
 }
 

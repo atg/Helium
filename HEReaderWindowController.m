@@ -35,6 +35,14 @@
 	[[self window] center];
 }
 
+- (void)postListDidResize:(HEPostListView *)listView
+{
+	float listViewWidth = NSMaxX([[listView enclosingScrollView] frame]);
+	
+	NSRect bottomBarButtonsContainerFrame = [bottomBarButtonsContainer frame];
+	bottomBarButtonsContainerFrame.origin.x = listViewWidth;
+	[bottomBarButtonsContainer setFrame:bottomBarButtonsContainerFrame];
+}
 - (void)postListSelectionDidChange:(HEPostListView *)listView
 {
 	NSManagedObject *postObject = [listView.selectedLayer managedObject];
@@ -55,6 +63,20 @@
 - (IBAction)showComments:(id)sender
 {
 	[self loadWebViewURLString:[[postsView.selectedLayer managedObject] valueForKey:@"commentsURL"]];
+}
+- (IBAction)openInBrowser:(id)sender
+{
+	NSURL *url = [[[[postWebView mainFrame] provisionalDataSource] request] URL];
+	if (url)
+	{
+		[[NSWorkspace sharedWorkspace] openURL:url];
+	}
+	else
+	{
+		url = [NSURL URLWithString:[[postsView.selectedLayer managedObject] valueForKey:@"URL"]];
+		if (url)
+			[[NSWorkspace sharedWorkspace] openURL:url];
+	}
 }
 
 #pragma mark Adding Feeds

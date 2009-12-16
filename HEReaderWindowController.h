@@ -16,12 +16,15 @@
 	IBOutlet NSObjectController *postController;
 	
 	IBOutlet WebView *postWebView;
+
+	IBOutlet NSView *bottomBarButtonsContainer;
 	
 	IBOutlet NSTextField *addFeedURLField;
 	IBOutlet NSSegmentedControl *addFeedImportance;
 }
 
 - (IBAction)showComments:(id)sender;
+- (IBAction)openInBrowser:(id)sender;
 
 - (BOOL)shouldCloseSheet:(id)sender;
 
