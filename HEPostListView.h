@@ -9,10 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 
+@class HEPostListItemLayer;
 
 @interface HEPostListView : NSView
 {
 	NSMutableArray *posts;
+	
+	HEPostListItemLayer *selectedLayer;
 }
 
 @end
