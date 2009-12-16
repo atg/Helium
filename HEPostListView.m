@@ -79,13 +79,13 @@
 	NSEntityDescription *postsEntity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:ctx];
 	[fetchFeedsRequest setEntity:postsEntity];
 	
-	/*
+	
 	[fetchFeedsRequest setSortDescriptors:
 	 [NSArray arrayWithObject:
-	  [NSSortDescriptor sortDescriptorWithKey:@"importance" ascending:NO]
+	  [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO]
 	  ]
 	 ];
-	 */
+	 
 	
 	NSError *err = nil;
 	NSArray *postObjects = [ctx executeFetchRequest:fetchFeedsRequest error:&err];
@@ -96,7 +96,8 @@
 		HEPostListItemLayer *layer = [[HEPostListItemLayer alloc] init];
 		layer.frame = CGRectMake(20, previousMaxY, [self bounds].size.width - 40, 66);
 		layer.title = [postObject valueForKey:@"title"];
-		//layer.source = [managedObject valueForKeyPath:@"feed.name"];
+		layer.source = [postObject valueForKeyPath:@"channel.name"];
+		NSLog(@"layer.source = %@", layer.source);
 		
 		layer.managedObject = postObject;
 		
@@ -192,10 +193,8 @@
 	[oldSelectedLayer setNeedsDisplay];
 	[layer setNeedsDisplay];
 	
-	NSLog(@"Delegate = %@", delegate);
 	if ([delegate respondsToSelector:@selector(postListSelectionDidChange:)])
 	{
-		NSLog(@"Delegate responds to selector");
 		[delegate postListSelectionDidChange:self];
 		
 	}

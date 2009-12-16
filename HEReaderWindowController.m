@@ -15,6 +15,7 @@
 @interface HEReaderWindowController ()
 
 - (BOOL)validateAddFeedURL;
+- (void)loadWebViewURLString:(NSString *)urlString;
 
 @end
 
@@ -36,20 +37,25 @@
 
 - (void)postListSelectionDidChange:(HEPostListView *)listView
 {
-	NSLog(@"Post list selected did change %@", [listView.selectedLayer managedObject]);
 	NSManagedObject *postObject = [listView.selectedLayer managedObject];
 	[postController setContent:postObject];
 	
-	if ([postObject valueForKey:@"URL"])
-		[self loadWebViewURL:[NSURL URLWithString:[postObject valueForKey:@"URL"]]];
+	[self loadWebViewURLString:[postObject valueForKey:@"URL"]];
 }
-- (void)loadWebViewURL:(NSURL *)url
+- (void)loadWebViewURLString:(NSString *)urlString
 {
-	NSLog(@"postWebView = %@", postWebView);
-	NSLog(@"URL = %@", url);
+	if (![urlString length])
+		return;
+	
+	NSURL *url = [NSURL URLWithString:urlString];
+	
 	[[postWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
+- (IBAction)showComments:(id)sender
+{
+	[self loadWebViewURLString:[[postsView.selectedLayer managedObject] valueForKey:@"commentsURL"]];
+}
 
 #pragma mark Adding Feeds
 

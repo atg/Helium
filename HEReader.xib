@@ -452,6 +452,30 @@
 							<int key="BWSVCollapsiblePopupSelection">0</int>
 							<bool key="BWSVDividerCanCollapse">NO</bool>
 						</object>
+						<object class="NSButton" id="467929477">
+							<reference key="NSNextResponder" ref="1006"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{203, 6}, {75, 18}}</string>
+							<reference key="NSSuperview" ref="1006"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSButtonCell" key="NSCell" id="928301263">
+								<int key="NSCellFlags">-2080244224</int>
+								<int key="NSCellFlags2">134348800</int>
+								<string key="NSContents">Comments</string>
+								<object class="NSFont" key="NSSupport" id="26">
+									<string key="NSName">LucidaGrande</string>
+									<double key="NSSize">11</double>
+									<int key="NSfFlags">3100</int>
+								</object>
+								<reference key="NSControlView" ref="467929477"/>
+								<int key="NSButtonFlags">-2038152961</int>
+								<int key="NSButtonFlags2">163</int>
+								<string key="NSAlternateContents"/>
+								<string key="NSKeyEquivalent"/>
+								<int key="NSPeriodicDelay">400</int>
+								<int key="NSPeriodicInterval">75</int>
+							</object>
+						</object>
 					</object>
 					<string key="NSFrameSize">{854, 578}</string>
 					<reference key="NSSuperview"/>
@@ -660,11 +684,7 @@
 								<int key="NSCellFlags2">272760832</int>
 								<string type="base64-UTF8" key="NSContents">SW1wb3J0YW50IGZlZWRzIGFyZSBtdXN0LXJlYWRzIHRoYXQgZ28gc3RyYWlnaHQgdG8gdGhlIHRvcC4K
 RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
-								<object class="NSFont" key="NSSupport">
-									<string key="NSName">LucidaGrande</string>
-									<double key="NSSize">11</double>
-									<int key="NSfFlags">3100</int>
-								</object>
+								<reference key="NSSupport" ref="26"/>
 								<reference key="NSControlView" ref="156910785"/>
 								<reference key="NSBackgroundColor" ref="226425844"/>
 								<reference key="NSTextColor" ref="280818640"/>
@@ -709,6 +729,7 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 					<string>NSNegateBooleanTransformer</string>
 					<string>NSIsNil</string>
 					<string>channel.name</string>
+					<string>commentsURL</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
@@ -853,6 +874,34 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 					</object>
 					<int key="connectionID">100</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden: selection.commentsURL</string>
+						<reference key="source" ref="467929477"/>
+						<reference key="destination" ref="919139505"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="467929477"/>
+							<reference key="NSDestination" ref="919139505"/>
+							<string key="NSLabel">hidden: selection.commentsURL</string>
+							<string key="NSBinding">hidden</string>
+							<string key="NSKeyPath">selection.commentsURL</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">NSIsNil</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">104</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showComments:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="467929477"/>
+					</object>
+					<int key="connectionID">105</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -898,6 +947,7 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="324931670"/>
 							<reference ref="426525584"/>
+							<reference ref="467929477"/>
 						</object>
 						<reference key="parent" ref="1005"/>
 					</object>
@@ -1175,6 +1225,20 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 						<reference key="object" ref="706135179"/>
 						<reference key="parent" ref="286031117"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">101</int>
+						<reference key="object" ref="467929477"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="928301263"/>
+						</object>
+						<reference key="parent" ref="1006"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">102</int>
+						<reference key="object" ref="928301263"/>
+						<reference key="parent" ref="467929477"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1188,6 +1252,8 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 					<string>1.WindowOrigin</string>
 					<string>1.editorWindowContentRectSynchronizationRect</string>
 					<string>10.IBPluginDependency</string>
+					<string>101.IBPluginDependency</string>
+					<string>102.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>27.IBPluginDependency</string>
 					<string>28.IBEditorWindowLastContentRect</string>
@@ -1239,6 +1305,8 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 					<boolean value="NO"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.brandonwalkin.BWToolkit</string>
@@ -1300,7 +1368,7 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100</int>
+			<int key="maxID">105</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1328,6 +1396,10 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 				<object class="IBPartialClassDescription">
 					<string key="className">HEReaderWindowController</string>
 					<string key="superclassName">NSWindowController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">showComments:</string>
+						<string key="NS.object.0">id</string>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">

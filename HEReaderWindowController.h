@@ -21,6 +21,8 @@
 	IBOutlet NSSegmentedControl *addFeedImportance;
 }
 
+- (IBAction)showComments:(id)sender;
+
 - (BOOL)shouldCloseSheet:(id)sender;
 
 @end

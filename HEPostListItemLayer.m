@@ -150,6 +150,12 @@
 	//[title drawInRect:rect withAttributes:attributes];
 	[title drawAtPoint:NSMakePoint(30, [self bounds].size.height - 60) withAttributes:attributes];
 	
+	attributes = [self attributesForSelected:isSelected small:YES];
+	size = [source sizeWithAttributes:attributes];
+	NSRect sourceRect = NSMakeRect(20, 20, [self bounds].size.width - 24.0, 30);
+	//[title drawInRect:rect withAttributes:attributes];
+	[source drawAtPoint:NSMakePoint(30, [self bounds].size.height - 60) withAttributes:attributes];
+	
 	[NSGraphicsContext setCurrentContext:oldContext];
 }
 

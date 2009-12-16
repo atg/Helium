@@ -10,6 +10,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 @class HEPostListItemLayer;
+@class HEPostListView;
+
+@protocol HEPostListViewDelegate<NSObject>
+
+- (void)postListSelectionDidChange:(HEPostListView *)listView;
+
+@end
+
 
 @interface HEPostListView : NSView
 {
@@ -17,7 +25,7 @@
 	
 	HEPostListItemLayer *selectedLayer;
 	
-	IBOutlet id delegate;
+	IBOutlet id<HEPostListViewDelegate> delegate;
 }
 
 @property (assign) id delegate;
