@@ -118,7 +118,7 @@
 }
 - (NSRect)sizeFrameToFit:(NSRect)frame
 {
-	float maxY = [[self superview] frame].size.height;
+	float maxY = [[self superview] frame].size.height - 20.0;
 	for (HEPostListItemLayer *post in posts)
 	{
 		float y = post.frame.origin.y + post.frame.size.height;
@@ -128,6 +128,7 @@
 	maxY += 20.0;
 	
 	frame.size.height = maxY;
+	
 	return frame;
 }
 - (void)setFrame:(NSRect)newFrame
