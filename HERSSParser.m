@@ -11,10 +11,12 @@
 
 @interface HERSSParser ()
 
-- (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement intoContext:(NSManagedObjectContext *)ctx;
-- (NSManagedObject *)parseItemElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx;
-- (NSManagedObject *)parseEnclosureElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx;
+- (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement feed:(NSManagedObject *)feed context:(NSManagedObjectContext *)ctx;
+- (NSManagedObject *)parseItemElement:(NSXMLElement *)itemElement channel:(NSManagedObject *)channel context:(NSManagedObjectContext *)ctx;
+- (NSManagedObject *)parseEnclosureElement:(NSXMLElement *)itemElement post:(NSManagedObject *)post context:(NSManagedObjectContext *)ctx;
 
+- (NSManagedObject *)getOrCreateWithEntity:(NSEntityDescription *)entity parent:(NSManagedObject *)parent parentKey:(NSString *)parentKey key:(NSString *)key value:(id)value context:(NSManagedObjectContext *)ctx;
+- (NSString *)subElementStringFrom:(NSXMLElement *)xmlElement name:(NSString *)subelementName;
 - (BOOL)addSubelementFrom:(NSXMLElement *)xmlElement name:(NSString *)subelementName into:(NSManagedObject *)mo key:(NSString *)key;
 
 @end
@@ -36,7 +38,6 @@
 {
 	//Download the XML
 	NSError *err = nil;
-	NSLog(@"url2");
 	NSXMLDocument *xml = [[NSXMLDocument alloc] initWithContentsOfURL:url options:NSXMLDocumentTidyXML error:&err];
 	if (!xml || err)
 	{
@@ -47,15 +48,20 @@
 	//Parse <channel>s
 	for (NSXMLElement *channel in [[xml rootElement] elementsForName:@"channel"])
 	{
-		NSManagedObject *channelObject = [self parseChannelElement:channel intoContext:ctx];
+		NSManagedObject *channelObject = [self parseChannelElement:channel feed:feedObject context:ctx];
 		[channelObject setValue:feedObject forKey:@"feed"];
 	}
 }
-- (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement intoContext:(NSManagedObjectContext *)ctx
+- (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement feed:(NSManagedObject *)feed context:(NSManagedObjectContext *)ctx
 {
-	NSEntityDescription *feedsEntity = [NSEntityDescription entityForName:@"Channel" inManagedObjectContext:ctx];
+	NSEntityDescription *channelsEntity = [NSEntityDescription entityForName:@"Channel" inManagedObjectContext:ctx];
 	
-	NSManagedObject *item = [[NSManagedObject alloc] initWithEntity:feedsEntity insertIntoManagedObjectContext:ctx];
+	//Check if the channel exists already
+	NSString *title = [self subElementStringFrom:channelElement name:@"title"];
+	if (!title)
+		return nil;
+	
+	NSManagedObject *item = [self getOrCreateWithEntity:channelsEntity parent:feed parentKey:@"feed" key:@"name" value:title context:ctx];
 	
 	[self addSubelementFrom:channelElement name:@"title" into:item key:@"name"];
 	[self addSubelementFrom:channelElement name:@"description" into:item key:@"summary"];
@@ -76,17 +82,21 @@
 	//Parse <item>s
 	for (NSXMLElement *channel in [channelElement elementsForName:@"item"])
 	{
-		NSManagedObject *itemObject = [self parseItemElement:channel context:ctx];
+		NSManagedObject *itemObject = [self parseItemElement:channel channel:item context:ctx];
 		[itemObject setValue:item forKey:@"channel"];
 	}
 	
 	return item;
 }
-- (NSManagedObject *)parseItemElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx
+- (NSManagedObject *)parseItemElement:(NSXMLElement *)itemElement channel:(NSManagedObject *)channel context:(NSManagedObjectContext *)ctx
 {
 	NSEntityDescription *postsEntity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:ctx];
 	
-	NSManagedObject *item = [[NSManagedObject alloc] initWithEntity:postsEntity insertIntoManagedObjectContext:ctx];
+	NSString *title = [self subElementStringFrom:itemElement name:@"title"];
+	if (!title)
+		return nil;
+	
+	NSManagedObject *item = [self getOrCreateWithEntity:postsEntity parent:channel parentKey:@"channel" key:@"title" value:title context:ctx];
 	
 	//RSS Required properties (although we don't require them)
 	[self addSubelementFrom:itemElement name:@"title" into:item key:@"title"];
@@ -117,26 +127,51 @@
 	//Parse <enclosures>s
 	for (NSXMLElement *channel in [itemElement elementsForName:@"enclosure"])
 	{
-		NSManagedObject *enclosureObject = [self parseEnclosureElement:channel context:ctx];
+		NSManagedObject *enclosureObject = [self parseEnclosureElement:channel post:item context:ctx];
 		[enclosureObject setValue:item forKey:@"post"];
 	}
 	
 	return item;
 }
-- (NSManagedObject *)parseEnclosureElement:(NSXMLElement *)itemElement context:(NSManagedObjectContext *)ctx
+- (NSManagedObject *)parseEnclosureElement:(NSXMLElement *)itemElement post:(NSManagedObject *)post context:(NSManagedObjectContext *)ctx
 {
 	//FIXME: Implement enclosures
 	return nil;
 }
 
-- (BOOL)addSubelementFrom:(NSXMLElement *)xmlElement name:(NSString *)subelementName into:(NSManagedObject *)mo key:(NSString *)key
+- (NSManagedObject *)getOrCreateWithEntity:(NSEntityDescription *)entity parent:(NSManagedObject *)parent parentKey:(NSString *)parentKey key:(NSString *)key value:(id)value context:(NSManagedObjectContext *)ctx
+{	
+	NSLog(@"Get or create with entity:%@\n parent:%@\n key:%@\n value:%@\n context:%@\n", entity, parent, key, value, ctx);
+	
+	NSFetchRequest *getExistingChannelRequest = [[NSFetchRequest alloc] init];
+	[getExistingChannelRequest setPredicate:[NSPredicate predicateWithFormat:@"%K=%@ && %K=%@", key, value, parentKey, parent]];
+	[getExistingChannelRequest setEntity:entity];
+	
+	NSError *err = nil;
+	NSArray *feeds = [ctx executeFetchRequest:getExistingChannelRequest error:&err];
+	NSManagedObject *item = [feeds lastObject];
+	
+	if (!item || err)
+		item = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:ctx];
+	
+	return item;
+}
+- (NSString *)subElementStringFrom:(NSXMLElement *)xmlElement name:(NSString *)subelementName
 {
 	NSArray *elements = [xmlElement elementsForName:subelementName];
 	if (![elements count])
-		return NO;
+		return nil;
 	
 	NSString *string = [[elements objectAtIndex:0] stringValue];
-	if ([string length])
+	if (![string length])
+		return nil;
+	
+	return string;
+}
+- (BOOL)addSubelementFrom:(NSXMLElement *)xmlElement name:(NSString *)subelementName into:(NSManagedObject *)mo key:(NSString *)key
+{
+	NSString *string = [self subElementStringFrom:xmlElement name:subelementName];
+	if (string)
 		[mo setValue:string forKey:key];
 	
 	//NSLog(@"Set key/value pair: %@, %@", key, string);

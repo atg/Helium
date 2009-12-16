@@ -97,7 +97,6 @@
 		layer.frame = CGRectMake(20, previousMaxY, [self bounds].size.width - 40, 66);
 		layer.title = [postObject valueForKey:@"title"];
 		layer.source = [postObject valueForKeyPath:@"channel.name"];
-		NSLog(@"layer.source = %@", layer.source);
 		
 		layer.managedObject = postObject;
 		
