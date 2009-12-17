@@ -10,6 +10,9 @@
 #import "HEPostListItemLayer.h"
 #import "HEApplicationDelegate.h"
 
+#import "NSManagedObject+Utilities.h"
+
+
 @interface HEPostListView ()
 
 - (void)refreshedModel:(NSNotification *)notif;
@@ -83,8 +86,10 @@
 	
 	
 	[fetchFeedsRequest setSortDescriptors:
-	 [NSArray arrayWithObject:
-	  [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO]
+	 [NSArray arrayWithObjects:
+	  [NSSortDescriptor sortDescriptorWithKey:@"channel.feed.importance" ascending:NO],
+	  [NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO],
+	  nil
 	  ]
 	 ];
 	 
@@ -104,7 +109,7 @@
 		layer.title = [postObject valueForKey:@"title"];
 		layer.source = [postObject valueForKeyPath:@"channel.name"];
 		
-		layer.managedObject = postObject;
+		layer.values = [postObject he_dictionaryFromManagedObject];
 		
 		previousMaxY = layer.frame.origin.y + layer.frame.size.height + 11;
 		

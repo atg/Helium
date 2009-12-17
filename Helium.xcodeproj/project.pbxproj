@@ -14,6 +14,7 @@
 		7509BDD110D9625B00ED6FAC /* HEPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509BDD010D9625B00ED6FAC /* HEPreferencesWindowController.m */; };
 		7523D21C10D98F1700144B8B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 7523D21B10D98F1700144B8B /* RegexKitLite.m */; };
 		7523D23210D9AAA700144B8B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7523D23110D9AAA700144B8B /* libicucore.dylib */; };
+		757559A810DA595C009224B7 /* NSManagedObject+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 757559A710DA595C009224B7 /* NSManagedObject+Utilities.m */; };
 		75E91C4D10D81A480045E672 /* HEReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E91C4C10D81A480045E672 /* HEReader.xib */; };
 		75E91C5010D81C640045E672 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */; };
 		75E91C8310D81C7B0045E672 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */; };
@@ -64,6 +65,8 @@
 		7523D21A10D98F1700144B8B /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		7523D21B10D98F1700144B8B /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		7523D23110D9AAA700144B8B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
+		757559A610DA595C009224B7 /* NSManagedObject+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Utilities.h"; sourceTree = "<group>"; };
+		757559A710DA595C009224B7 /* NSManagedObject+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Utilities.m"; sourceTree = "<group>"; };
 		75E91C4C10D81A480045E672 /* HEReader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HEReader.xib; sourceTree = "<group>"; };
 		75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
 		75E91C8A10D81E9F0045E672 /* HEReaderWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEReaderWindowController.h; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 			children = (
 				75E91D0D10D842320045E672 /* HERSSDateParser.h */,
 				75E91D0E10D842320045E672 /* HERSSDateParser.m */,
+				757559A610DA595C009224B7 /* NSManagedObject+Utilities.h */,
+				757559A710DA595C009224B7 /* NSManagedObject+Utilities.m */,
 				7523D21A10D98F1700144B8B /* RegexKitLite.h */,
 				7523D21B10D98F1700144B8B /* RegexKitLite.m */,
 			);
@@ -322,6 +327,7 @@
 				7509BD7B10D95B0400ED6FAC /* HEAtomParser.m in Sources */,
 				7509BDD110D9625B00ED6FAC /* HEPreferencesWindowController.m in Sources */,
 				7523D21C10D98F1700144B8B /* RegexKitLite.m in Sources */,
+				757559A810DA595C009224B7 /* NSManagedObject+Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

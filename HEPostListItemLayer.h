@@ -16,7 +16,7 @@
 	NSString *title;
 	NSString *source;
 	
-	NSManagedObject *managedObject;
+	NSDictionary *values;
 	
 	BOOL isSelected;
 }
@@ -25,7 +25,7 @@
 @property (assign) NSString *title;
 @property (assign) NSString *source;
 
-@property (assign) NSManagedObject *managedObject;
+@property (assign) NSDictionary *values;
 
 @property (assign) BOOL isSelected;
 

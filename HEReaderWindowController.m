@@ -51,7 +51,7 @@
 }
 - (void)postListSelectionDidChange:(HEPostListView *)listView
 {
-	NSManagedObject *postObject = [listView.selectedLayer managedObject];
+	NSManagedObject *postObject = [listView.selectedLayer values];
 	[postController setContent:postObject];
 	
 	[self loadWebViewURLString:[postObject valueForKey:@"URL"]];
@@ -68,7 +68,7 @@
 
 - (IBAction)showComments:(id)sender
 {
-	[self loadWebViewURLString:[[postsView.selectedLayer managedObject] valueForKey:@"commentsURL"]];
+	[self loadWebViewURLString:[[postsView.selectedLayer values] valueForKey:@"commentsURL"]];
 }
 - (IBAction)openInBrowser:(id)sender
 {
@@ -79,7 +79,7 @@
 	}
 	else
 	{
-		url = [NSURL URLWithString:[[postsView.selectedLayer managedObject] valueForKey:@"URL"]];
+		url = [NSURL URLWithString:[[postsView.selectedLayer values] valueForKey:@"URL"]];
 		if (url)
 			[[NSWorkspace sharedWorkspace] openURL:url];
 	}

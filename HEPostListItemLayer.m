@@ -20,7 +20,7 @@
 @synthesize icon;
 @synthesize title;
 @synthesize source;
-@synthesize managedObject;
+@synthesize values;
 @synthesize isSelected;
 
 - (id)init
@@ -48,7 +48,7 @@
 	else
 		[dict setValue:[NSFont systemFontOfSize:fontSize] forKey:NSFontAttributeName];
 	
-	float alpha = (small ? 0.9 : 1.0);
+	float alpha = (small ? 0.8 : 1.0);
 	if (selected)
 		[dict setValue:[NSColor colorWithCalibratedWhite:1.0 alpha:alpha] forKey:NSForegroundColorAttributeName];
 	else
@@ -59,9 +59,9 @@
 	[shadow setShadowBlurRadius:0.0];
 	
 	if (selected)
-		[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.0 alpha:1.0]];
+		[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.0 alpha:alpha]];
 	else
-		[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.9 alpha:1.0]];
+		[shadow setShadowColor:[NSColor colorWithCalibratedWhite:1.0 alpha:alpha]];
 	
 	[dict setValue:shadow forKey:NSShadowAttributeName];
 	
