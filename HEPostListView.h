@@ -32,4 +32,6 @@
 @property (assign) id delegate;
 @property (assign, setter=setSelectedLayer:) id selectedLayer;
 
+- (void)refresh;
+
 @end

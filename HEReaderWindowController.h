@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
+#import <BWToolkitFramework/BWToolkitFramework.h>
+
 #import "HEPostListView.h"
 
 @interface HEReaderWindowController : NSWindowController<HEPostListViewDelegate> {
@@ -19,6 +21,7 @@
 
 	IBOutlet NSView *bottomBarButtonsContainer;
 	
+	IBOutlet BWSheetController *addFeedSheetController;
 	IBOutlet NSTextField *addFeedURLField;
 	IBOutlet NSSegmentedControl *addFeedImportance;
 }
@@ -26,7 +29,10 @@
 - (IBAction)showComments:(id)sender;
 - (IBAction)openInBrowser:(id)sender;
 - (IBAction)backForwardButtons:(id)sender;
+- (IBAction)addFeed:(id)sender;
 
 - (BOOL)shouldCloseSheet:(id)sender;
+
+- (void)refresh;
 
 @end

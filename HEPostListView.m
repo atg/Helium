@@ -12,12 +12,12 @@
 
 @interface HEPostListView ()
 
-- (void)refresh;
 - (void)refreshedModel:(NSNotification *)notif;
 - (void)removeAllItems;
 
 - (void)sizeToFit;
 - (NSRect)sizeFrameToFit:(NSRect)frame;
+- (void)scrollToVisible:(HEPostListItemLayer *)layer;
 
 @end
 
@@ -115,13 +115,15 @@
 		{
 			self.selectedLayer = layer;
 		}
-		
+				
 		[layer setNeedsDisplay];
 		count++;
 	}
 	
 	[[self layer] setNeedsDisplay];
 	[self sizeToFit];
+	
+	[self scrollToVisible:self.selectedLayer];
 }
 - (void)sizeToFit
 {
@@ -190,7 +192,7 @@
 	
 	for (HEPostListItemLayer *post in posts)
 	{
-		if (NSPointInRect(p, NSRectFromCGRect(post.frame)))
+		if ([post hitTest:NSPointFromCGPoint(p)])
 		{
 			self.selectedLayer = post;
 			
@@ -198,26 +200,33 @@
 		}
 	}
 }
+- (void)scrollToVisible:(HEPostListItemLayer *)layer
+{
+	if (!layer)
+		return;
+	
+	NSInteger layerIndex = [posts indexOfObjectIdenticalTo:layer];
+	float margin = 12.0;
+	if (layerIndex == 0)
+		margin = 20.0;
+	
+	NSRect flippedLayerRect = [layer frame];
+	flippedLayerRect.origin.y = [self frame].size.height - NSMaxY(flippedLayerRect);
+	
+	NSClipView *clipView = [[self enclosingScrollView] contentView];
+	
+	//Check if any portion of the layer is outside the clip
+	if (!NSEqualRects(NSIntersectionRect([clipView documentVisibleRect], flippedLayerRect), flippedLayerRect))
+	{
+		//If so, scroll so it's fully visible
+		[self scrollPoint:NSMakePoint(0, [self frame].size.height + margin - layer.frame.origin.y - [clipView frame].size.height)];
+	}
+}
 - (void)setSelectedLayer:(HEPostListItemLayer *)layer
 {
-	if (layer && selectedLayer != layer)
+	if (selectedLayer != layer)
 	{
-		NSInteger layerIndex = [posts indexOfObjectIdenticalTo:layer];
-		float margin = 12.0;
-		if (layerIndex == 0)
-			margin = 20.0;
-		
-		NSRect flippedLayerRect = [layer frame];
-		flippedLayerRect.origin.y = [self frame].size.height - NSMaxY(flippedLayerRect);
-		
-		NSClipView *clipView = [[self enclosingScrollView] contentView];
-		
-		//Check if any portion of the layer is outside the clip
-		if (!NSEqualRects(NSIntersectionRect([clipView documentVisibleRect], flippedLayerRect), flippedLayerRect))
-		{
-			//If so, scroll so it's fully visible
-			[self scrollPoint:NSMakePoint(0, [self frame].size.height + margin - layer.frame.origin.y - [clipView frame].size.height)];//[self frame].size.height  - layer.frame.size.height[[[self enclosingScrollView] contentView] frame].size.height - layer.frame.origin.y/* */)];			
-		}
+		[self scrollToVisible:layer];
 	}
 	
 	HEPostListItemLayer *oldSelectedLayer = selectedLayer;

@@ -8,6 +8,7 @@
 
 #import "HEReaderWindowController.h"
 
+#import "HEApplicationDelegate.h"
 #import "HERefresher.h"
 #import "HEPostListView.h"
 #import "HEPostListItemLayer.h"
@@ -32,9 +33,14 @@
 
 - (void)windowDidLoad
 {
+	[self refresh];
 	[[self window] center];
 }
 
+- (void)refresh
+{
+	[postsView refresh];
+}
 - (void)postListDidResize:(HEPostListView *)listView
 {
 	float listViewWidth = NSMaxX([[listView enclosingScrollView] frame]);
@@ -91,8 +97,19 @@
 	}
 }
 
+- (void)close
+{
+	[(HEApplicationDelegate *)[NSApp delegate] readerWillClose:self];
+	
+	[super close];
+}
+
 #pragma mark Adding Feeds
 
+- (IBAction)addFeed:(id)sender
+{
+	[addFeedSheetController openSheet:sender];
+}
 - (BOOL)validateAddFeedURL
 {
 	//FIXME: Do some fancier validation of feed URLs (for instance, checking the scheme)

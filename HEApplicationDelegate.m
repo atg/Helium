@@ -11,6 +11,13 @@
 #import "HEPreferencesWindowController.h"
 #import "HERefresher.h"
 
+@interface HEApplicationDelegate ()
+
+- (HEReaderWindowController *)createReaderWindowAndOpen;
+
+@end
+
+
 @implementation HEApplicationDelegate
 
 @synthesize refresher;
@@ -32,12 +39,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-	HEReaderWindowController *reader = [[HEReaderWindowController alloc] init];	
-	[readerWindowControllers addObject:reader];
-	
+	[self createReaderWindowAndOpen];
 	[refresher refresh];
-	
-	[reader showWindow:nil];
 }
 
 - (IBAction)showPreferences:(id)sender
@@ -48,6 +51,22 @@
 	}
 	
 	[preferencesController showWindow:self];
+}
+
+- (void)readerWillClose:(HEReaderWindowController *)reader
+{
+	[readerWindowControllers removeObject:reader];
+}
+- (IBAction)newReaderWindow:(id)sender
+{
+	HEReaderWindowController *reader = [self createReaderWindowAndOpen];
+}
+- (HEReaderWindowController *)createReaderWindowAndOpen
+{
+	HEReaderWindowController *reader = [[HEReaderWindowController alloc] init];	
+	[readerWindowControllers addObject:reader];
+	
+	[reader showWindow:nil];
 }
 
 #pragma mark Core Data Boilerplate

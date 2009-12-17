@@ -10,6 +10,7 @@
 
 @class HERefresher;
 @class HEPreferencesWindowController;
+@class HEReaderWindowController;
 
 @interface HEApplicationDelegate : NSObject<NSApplicationDelegate>
 {    
@@ -34,6 +35,9 @@
 - (IBAction)saveAction:sender;
 
 - (IBAction)showPreferences:(id)sender;
+
+- (IBAction)newReaderWindow:(id)sender;
+- (void)readerWillClose:(HEReaderWindowController *)reader;
 
 - (NSManagedObjectContext *)managedObjectContextForBackgroundRefresh;
 
