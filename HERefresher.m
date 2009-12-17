@@ -38,7 +38,6 @@
 - (void)scheduleTimer
 {
 	NSInteger refreshIntervalInt = [[NSUserDefaults standardUserDefaults] integerForKey:@"HERefreshInterval"];
-	NSLog(@"refreshIntervalInt = %d", refreshIntervalInt);
 	NSTimeInterval refreshInterval = 0.0;
 	if (refreshIntervalInt >= 30) //30 seconds is the minimum
 		refreshInterval = (NSTimeInterval)refreshIntervalInt;

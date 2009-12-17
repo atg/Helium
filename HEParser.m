@@ -15,6 +15,7 @@
 @interface HEParser ()
 
 + (id)autodetectAndParseURL:(NSString *)urlString feedObject:(NSManagedObject *)feed allowHTMLIndirection:(BOOL)allowHTMLIndirection;
++ (NSString *)decodingXMLEntitiesInString:(NSString *)entStr;
 
 @end
 
@@ -113,28 +114,24 @@ finish:
 {
 	if (![urlString length])
 		return nil;
-	
-	NSLog(@"Autodetect and parse URL = %@", urlString);
-	
+		
 	//Sanatize the URL
 	if (![urlString isMatchedByRegex:@"^[A-Za-z_\\-]+://"])
 	{
 		urlString = [@"http://" stringByAppendingString:urlString];
 	}
-	NSLog(@"\t urlString = '%@'", urlString);
 	
 	//FIXME: Use NSURLConnection throughout to handle redirects
 	
 	NSURL *url = [NSURL URLWithString:urlString];
-	NSLog(@"\t url = '%@'", url);
+	NSLog(@"Parsing URL = '%@'", url);
 	
 	NSStringEncoding stringEncoding = NSUTF8StringEncoding;
 	NSError *err = nil;
 	NSString *string = [NSString stringWithContentsOfURL:url usedEncoding:&stringEncoding error:&err];
-	NSLog(@"\t [string length] = '%d'", [string length]);
-	NSLog(@"\t err = '%@'", err);
 	if (err || ![string length])
 	{
+		NSLog(@"\t Error getting URL = '%@'", err);
 		return nil;
 	}
 	
@@ -143,7 +140,6 @@ finish:
 	//RSS
 	if ([string isMatchedByRegex:@"<rss\\b"])
 	{
-		NSLog(@"Matched rss");
 		HERSSParser *parser = [[HERSSParser alloc] init];
 		parser.stringContents = string;
 		return parser;
@@ -152,7 +148,6 @@ finish:
 	//Atom
 	else if ([string isMatchedByRegex:@"<feed\\b"])
 	{
-		NSLog(@"Matched feed");
 		HEAtomParser *parser = [[HEAtomParser alloc] init];
 		parser.stringContents = string;
 		return parser;
@@ -161,19 +156,13 @@ finish:
 	//HTML
 	else if (allowHTMLIndirection)
 	{
-		//<\s*link.+?type\s*=\s*("|')application/rss(\+xml)?("|')[^>]*>
-		
-		//application/(rss/atom)\+xml
-		
-		//href=("|')([^"']+)("|')
+		//FIXME: Parsing the HTML with regexes is a bit of a hack, and there are many (albeit unlikely) cases that could trip it up. Replace with something better
 		
 		//Extract a link tag
 		NSString *linkTag = [string stringByMatching:@"<\\s*link[^>]+type\\s*=\\s*(\"|')application/(atom|rss)(\\+xml)?(\"|')[^>]*>"];
-		NSLog(@"\t linkTag = %@", linkTag);
 		
 		//Extract the href
 		NSArray *components = [linkTag captureComponentsMatchedByRegex:@"href=(\"|')([^\"']+)(\"|')"];
-		NSLog(@"\t components = %@", components);
 		if ([components count] == 4)
 		{
 			NSMutableString *href = [self decodingXMLEntitiesInString:[components objectAtIndex:2]];
@@ -183,10 +172,7 @@ finish:
 		}
 	}
 	
-	NSLog(@"Nothing?");
-	
-	//NSLog(@"Nothing? %@", string);
-
+	NSLog(@"\t Contents appears to be invalid");
 	
 	return nil;
 }
@@ -213,9 +199,7 @@ finish:
 	{
 		xml = [[NSXMLDocument alloc] initWithContentsOfURL:url options:NSXMLDocumentTidyXML error:&err];
 	}
-	
-	//NSLog(@"Parsing = %@", xml);
-	
+		
 	if (err || !xml)
 	{
 		NSLog(@"Error parsing XML document: %@", err);
@@ -276,9 +260,7 @@ finish:
 	NSString *string = [self subElementStringFrom:xmlElement name:subelementName];
 	if (string)
 		[mo setValue:string forKey:key];
-	
-	//NSLog(@"Set key/value pair: %@, %@", key, string);
-	
+		
 	return YES;
 }
 
