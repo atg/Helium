@@ -12,6 +12,15 @@
 
 @implementation HERSSParser
 
+- (void)parseXML:(NSXMLDocument *)xml intoContext:(NSManagedObjectContext *)ctx
+{
+	//Parse <channel>s
+	for (NSXMLElement *channel in [[xml rootElement] elementsForName:@"channel"])
+	{
+		NSManagedObject *channelObject = [self parseChannelElement:channel feed:feedObject context:ctx];
+		[channelObject setValue:feedObject forKey:@"feed"];
+	}
+}
 - (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement feed:(NSManagedObject *)feed context:(NSManagedObjectContext *)ctx
 {
 	NSEntityDescription *channelsEntity = [NSEntityDescription entityForName:@"Channel" inManagedObjectContext:ctx];

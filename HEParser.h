@@ -13,8 +13,13 @@
 {
 	NSURL *url;
 	NSManagedObject *feedObject;
+	
+	NSString *stringContents;
 }
 
+@property (assign) NSString *stringContents;
+
++ (id)autodetectAndParseURL:(NSString *)urlString feedObject:(NSManagedObject *)feed;
 - (id)initWithURL:(NSURL *)docURL feedObject:(NSManagedObject *)feedObject;
 
 - (void)parseIntoContext:(NSManagedObjectContext *)ctx;
@@ -29,6 +34,7 @@
 
 @interface HEParser (Protected)
 
+- (void)parseXML:(NSXMLDocument *)xml intoContext:(NSManagedObjectContext *)ctx;
 - (NSManagedObject *)parseChannelElement:(NSXMLElement *)channelElement feed:(NSManagedObject *)feed context:(NSManagedObjectContext *)ctx;
 - (NSManagedObject *)parseItemElement:(NSXMLElement *)itemElement channel:(NSManagedObject *)channel context:(NSManagedObjectContext *)ctx;
 - (NSManagedObject *)parseEnclosureElement:(NSXMLElement *)itemElement post:(NSManagedObject *)post context:(NSManagedObjectContext *)ctx;

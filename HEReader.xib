@@ -24,7 +24,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="29"/>
-			<integer value="111"/>
+			<integer value="8"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -142,13 +142,13 @@
 												<object class="NSScroller" id="432155750">
 													<reference key="NSNextResponder" ref="692251290"/>
 													<int key="NSvFlags">-2147483392</int>
-													<string key="NSFrame">{{164, 1}, {15, 111}}</string>
+													<string key="NSFrame">{{189, 0}, {15, 300}}</string>
 													<reference key="NSSuperview" ref="692251290"/>
 													<int key="NSViewLayerContentsRedrawPolicy">2</int>
 													<reference key="NSTarget" ref="692251290"/>
 													<string key="NSAction">_doScroller:</string>
 													<double key="NSCurValue">1</double>
-													<double key="NSPercent">0.9910714285714286</double>
+													<double key="NSPercent">0.54844606946983543</double>
 												</object>
 												<object class="NSScroller" id="767897874">
 													<reference key="NSNextResponder" ref="692251290"/>
@@ -457,13 +457,13 @@
 							<int key="NSvFlags">292</int>
 							<object class="NSMutableArray" key="NSSubviews">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSSegmentedControl" id="8559503">
+								<object class="NSSegmentedControl" id="571915875">
 									<reference key="NSNextResponder" ref="834625576"/>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 6}, {57, 19}}</string>
 									<reference key="NSSuperview" ref="834625576"/>
 									<bool key="NSEnabled">YES</bool>
-									<object class="NSSegmentedCell" key="NSCell" id="876160210">
+									<object class="NSSegmentedCell" key="NSCell" id="1013083529">
 										<int key="NSCellFlags">67239424</int>
 										<int key="NSCellFlags2">131072</int>
 										<object class="NSFont" key="NSSupport" id="26">
@@ -471,7 +471,7 @@
 											<double key="NSSize">11</double>
 											<int key="NSfFlags">3100</int>
 										</object>
-										<reference key="NSControlView" ref="8559503"/>
+										<reference key="NSControlView" ref="571915875"/>
 										<object class="NSMutableArray" key="NSSegmentImages">
 											<bool key="EncodedWithXMLCoder">YES</bool>
 											<object class="NSSegmentItem">
@@ -1080,7 +1080,7 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 					<object class="IBActionConnection" key="connection">
 						<string key="label">backForwardButtons:</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="8559503"/>
+						<reference key="destination" ref="571915875"/>
 					</object>
 					<int key="connectionID">135</int>
 				</object>
@@ -1414,7 +1414,7 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="877978173"/>
 							<reference ref="641427299"/>
-							<reference ref="8559503"/>
+							<reference ref="571915875"/>
 						</object>
 						<reference key="parent" ref="1006"/>
 					</object>
@@ -1448,17 +1448,17 @@ RmlsbGVyIGZlZWRzIGFkZCBleHRyYSBjb250ZW50IHRvIHlvdXIgc3RyZWFtLg</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">133</int>
-						<reference key="object" ref="8559503"/>
+						<reference key="object" ref="571915875"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="876160210"/>
+							<reference ref="1013083529"/>
 						</object>
 						<reference key="parent" ref="834625576"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">134</int>
-						<reference key="object" ref="876160210"/>
-						<reference key="parent" ref="8559503"/>
+						<reference key="object" ref="1013083529"/>
+						<reference key="parent" ref="571915875"/>
 					</object>
 				</object>
 			</object>

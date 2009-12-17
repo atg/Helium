@@ -94,12 +94,10 @@
 		for (NSManagedObject *feed in feeds)
 		{
 			//Get the URL
-			NSURL *url = [NSURL URLWithString:[feed valueForKey:@"URL"]];
-			if (!url)
-				continue;
+			NSString *urlString = [feed valueForKey:@"URL"];
 			
 			//Send to the parser
-			HERSSParser *parser = [[HERSSParser alloc] initWithURL:url feedObject:feed];
+			HEParser *parser = [HEParser autodetectAndParseURL:urlString feedObject:feed];
 			[parser parseIntoContext:ctx];
 		}
 		

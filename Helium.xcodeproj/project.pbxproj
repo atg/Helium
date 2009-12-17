@@ -12,6 +12,8 @@
 		7509BD7B10D95B0400ED6FAC /* HEAtomParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509BD7A10D95B0400ED6FAC /* HEAtomParser.m */; };
 		7509BD9810D95C3D00ED6FAC /* HEPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7509BD9710D95C3D00ED6FAC /* HEPreferences.xib */; };
 		7509BDD110D9625B00ED6FAC /* HEPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509BDD010D9625B00ED6FAC /* HEPreferencesWindowController.m */; };
+		7523D21C10D98F1700144B8B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 7523D21B10D98F1700144B8B /* RegexKitLite.m */; };
+		7523D23210D9AAA700144B8B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7523D23110D9AAA700144B8B /* libicucore.dylib */; };
 		75E91C4D10D81A480045E672 /* HEReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E91C4C10D81A480045E672 /* HEReader.xib */; };
 		75E91C5010D81C640045E672 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */; };
 		75E91C8310D81C7B0045E672 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */; };
@@ -59,6 +61,9 @@
 		7509BD9710D95C3D00ED6FAC /* HEPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HEPreferences.xib; sourceTree = "<group>"; };
 		7509BDCF10D9625B00ED6FAC /* HEPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEPreferencesWindowController.h; sourceTree = "<group>"; };
 		7509BDD010D9625B00ED6FAC /* HEPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEPreferencesWindowController.m; sourceTree = "<group>"; };
+		7523D21A10D98F1700144B8B /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		7523D21B10D98F1700144B8B /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		7523D23110D9AAA700144B8B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
 		75E91C4C10D81A480045E672 /* HEReader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HEReader.xib; sourceTree = "<group>"; };
 		75E91C4F10D81C640045E672 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BWToolkitFramework.framework; sourceTree = "<group>"; };
 		75E91C8A10D81E9F0045E672 /* HEReaderWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEReaderWindowController.h; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 				75E91C5010D81C640045E672 /* BWToolkitFramework.framework in Frameworks */,
 				75E91CB410D827980045E672 /* WebKit.framework in Frameworks */,
 				75E91D5C10D864990045E672 /* QuartzCore.framework in Frameworks */,
+				7523D23210D9AAA700144B8B /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +124,7 @@
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				75E91CB310D827980045E672 /* WebKit.framework */,
 				75E91D5B10D864990045E672 /* QuartzCore.framework */,
+				7523D23110D9AAA700144B8B /* libicucore.dylib */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -229,6 +236,8 @@
 			children = (
 				75E91D0D10D842320045E672 /* HERSSDateParser.h */,
 				75E91D0E10D842320045E672 /* HERSSDateParser.m */,
+				7523D21A10D98F1700144B8B /* RegexKitLite.h */,
+				7523D21B10D98F1700144B8B /* RegexKitLite.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -312,6 +321,7 @@
 				7509BD5810D9590700ED6FAC /* HEParser.m in Sources */,
 				7509BD7B10D95B0400ED6FAC /* HEAtomParser.m in Sources */,
 				7509BDD110D9625B00ED6FAC /* HEPreferencesWindowController.m in Sources */,
+				7523D21C10D98F1700144B8B /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

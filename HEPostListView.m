@@ -66,8 +66,6 @@
 	[posts addObject:layer3];
 	[[self layer] addSublayer:layer3];
 	 */
-	
-	[[self enclosingScrollView] scrollToTopOfDocument:nil];
 }
 - (void)refreshedModel:(NSNotification *)notif
 {
