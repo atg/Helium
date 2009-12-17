@@ -200,15 +200,24 @@
 }
 - (void)setSelectedLayer:(HEPostListItemLayer *)layer
 {
-	if (selectedLayer != layer)
+	if (layer && selectedLayer != layer)
 	{
 		NSInteger layerIndex = [posts indexOfObjectIdenticalTo:layer];
 		float margin = 12.0;
 		if (layerIndex == 0)
 			margin = 20.0;
 		
-		//If the layers are different, scroll to the new layer
-		[self scrollPoint:NSMakePoint(0, [self frame].size.height + margin - layer.frame.origin.y - [[[self enclosingScrollView] contentView] frame].size.height)];//[self frame].size.height  - layer.frame.size.height[[[self enclosingScrollView] contentView] frame].size.height - layer.frame.origin.y/* */)];
+		NSRect flippedLayerRect = [layer frame];
+		flippedLayerRect.origin.y = [self frame].size.height - NSMaxY(flippedLayerRect);
+		
+		NSClipView *clipView = [[self enclosingScrollView] contentView];
+		
+		//Check if any portion of the layer is outside the clip
+		if (!NSEqualRects(NSIntersectionRect([clipView documentVisibleRect], flippedLayerRect), flippedLayerRect))
+		{
+			//If so, scroll so it's fully visible
+			[self scrollPoint:NSMakePoint(0, [self frame].size.height + margin - layer.frame.origin.y - [clipView frame].size.height)];//[self frame].size.height  - layer.frame.size.height[[[self enclosingScrollView] contentView] frame].size.height - layer.frame.origin.y/* */)];			
+		}
 	}
 	
 	HEPostListItemLayer *oldSelectedLayer = selectedLayer;
